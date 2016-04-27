@@ -67,18 +67,41 @@ const allseries = [
 	{
 		id: 'a',
 		title: '魔法少女まどか☆マギカ',
-		aliases: ['まどか☆マギカ', 'まどマギ'],
-		characters: ...
+		aliases: ['まどか☆マギカ', 'まどマギ']
 	}, {
 		id: 'b',
 		title: 'ゆるゆり',
-		aliases: null,
-		characters: ...
+		aliases: null
 	},
 	...
 ];
 
-const series = homula.utils.detectSeries(novel, allseries);
+const allchars = [
+	{
+		id: 'a',
+		series: ['a']
+		name: '鹿目 まどか',
+		aliases: ['まどか', 'まど'],
+		color: '#f79286'
+	}, {
+		id: 'b',
+		series: ['a']
+		name: '暁美 ほむら',
+		aliases: ['ほむら', 'ほむ', 'ほむほむ'],
+		color: '#8f5ab5'
+	}, {
+		id: 'c',
+		series: ['b']
+		name: '赤座 あかり',
+		aliases: ['あかり', 'あか'],
+		color: '#ff2445'
+	},
+	...
+];
+
+const world = new homula.utils.World(allseries, allchars);
+
+const series = homula.utils.detectSeries(novel, world);
 ```
 
 ## License
