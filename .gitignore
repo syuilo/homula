@@ -1,0 +1,11 @@
+/node_modules
+/test
+/built
+/typings
+/bower_components
+npm-debug.log
+/tmp
+/uploads
+/src/core/special
+identity
+*.pem

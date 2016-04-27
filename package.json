@@ -1,0 +1,35 @@
+{
+  "name": "homula",
+  "version": "0.0.0",
+  "description": "A novel analyzer",
+  "main": "./built/main.js",
+  "typings": "./built/main.d.ts",
+  "repository": {
+    "url": "https://github.com/syuilo/homula.git"
+  },
+  "scripts": {
+    "dtsm": "dtsm --insight false install",
+    "build": "gulp build",
+    "lint": "gulp lint",
+    "test": "gulp test"
+  },
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "dtsm": "1.0.0",
+    "gulp": "3.9.1",
+    "gulp-tslint": "4.3.5",
+    "gulp-typescript": "2.13.0",
+    "tslint": "3.7.4",
+    "merge2": "0.3.6",
+    "typescript": "1.8.10"
+  },
+  "dependencies": {
+    "assign-deep": "0.4.5",
+    "debug": "2.2.0",
+    "escape-html": "1.0.3",
+    "html-entities": "1.2.0",
+    "moment": "2.13.0",
+    "seedrandom": "2.4.2"
+  }
+}
