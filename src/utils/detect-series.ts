@@ -31,7 +31,7 @@ export default(
 			.map(x => x.text));
 		break;
 	default:
-		break;
+		throw 'unknown type';
 	}
 
 	// SS内に登場するすべてのキャラクター名(と思われる文字列)を抽出
