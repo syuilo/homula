@@ -1,6 +1,6 @@
+const BaseN: any = require('basen');
 import Character from './character';
 import NovelBase from './novel-base';
-import nSin from './utils/n-sin-generator';
 
 /**
  * HTMLにおけるクラス名の全ての桁で使用可能な文字
@@ -8,6 +8,10 @@ import nSin from './utils/n-sin-generator';
  * ※ 大文字小文字は区別しない
  */
 const htmlclasschars = 'abcdefghijklmnopqrstuvwxyz';
+
+const baseN = new BaseN({
+	base: htmlclasschars.split('')
+});
 
 /**
  * キャラクター アイテム
@@ -34,7 +38,7 @@ export default class {
 			return {
 				id: c.id,
 				color: c.color,
-				class: nSin(i, htmlclasschars)
+				class: baseN(i)
 			};
 		});
 	}
