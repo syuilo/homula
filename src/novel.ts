@@ -1,4 +1,4 @@
-import { ICharacter } from './interfaces';
+import Character from './character';
 import Token from './tokenizer/token';
 import tokenize from './tokenizer/tokenize';
 import NovelBase from './novel-base';
@@ -35,7 +35,7 @@ export class NovelContext extends NovelContextBase {
 	public tokens: Token[] = null;
 
 	constructor(
-		characters: ICharacter[],
+		characters: Character[],
 		tokens: Token[]
 	) {
 		super(characters);
@@ -52,8 +52,11 @@ export class NovelContext extends NovelContextBase {
 	/**
 	 * キャラクターの統計を取得します
 	 */
-	public getCharactersStatistics(): any {
-		const foundCharacters: ICharacter[] = [];
+	public getCharactersStatistics(): {
+		id: string;
+		onStageRatio: number;
+	}[] {
+		const foundCharacters: Character[] = [];
 
 		this.tokens
 		.filter((t: INamePartToken) => t.type === 'character-name')
@@ -78,9 +81,10 @@ export class NovelContext extends NovelContextBase {
 			// このキャラの登場の割合は、(このキャラの登場回数 / すべてのキャラの登場回数) で求める
 			const onStageRatio = onStageCount / allCount;
 
-			return Object.assign({}, char, {
+			return {
+				id: char.id,
 				onStageRatio: onStageRatio
-			});
+			};
 		})
 		// 登場頻度で降順ソート
 		.sort((a, b) => {

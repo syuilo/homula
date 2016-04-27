@@ -1,10 +1,10 @@
 const assign = require('assign-deep');
 
-import { ISeries, ICharacter, IPost, IUser } from './interfaces';
+import Character from '../../character';
+import { Post } from '../../thread-novel';
 
 import World from './world';
 import extractNamePartInSerif from './extract-name-part-in-serif';
-import askCharacter from './ask-character';
 
 /**
  * 本文と思われる投稿をマークします(強)
@@ -89,7 +89,7 @@ export default
 
 	// 与えられたテキストが「シリーズのキャラが登場するSS形式の」文章であるかどうかを判定します。
 	function isSerifs(text: string): boolean {
-		const chars: ICharacter[] = [];
+		const chars: Character[] = [];
 
 		text.split('\n').forEach(line => {
 			const name = extractNamePartInSerif(line);
@@ -99,7 +99,7 @@ export default
 			}
 
 			allchars.forEach(c => {
-				if (askCharacter(c, name)) {
+				if (c.match(name)) {
 					chars.push(c);
 				}
 			});

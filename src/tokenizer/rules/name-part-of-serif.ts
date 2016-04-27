@@ -1,10 +1,9 @@
-import { ICharacter } from '../../interfaces';
+import Character from '../../character';
 import NovelBase from '../../novel-base';
 import Token from '../token';
 import CharacterIdentity from '../../utils/character-identity';
 import identity from '../../utils/identity';
 import extractNamePart from '../../utils/extract-name-part-in-serif';
-import match from '../../utils/ask-character';
 
 export default {
 	name: 'name-part-of-serif',
@@ -12,7 +11,7 @@ export default {
 };
 
 export interface INamePartToken extends Token {
-	character: ICharacter;
+	character: Character;
 }
 
 /**
@@ -33,7 +32,7 @@ function exec($: NovelBase, text: string): Token[] {
 	}
 
 	const matchChars = $.characters
-		.filter(c => match(c, part));
+		.filter(c => c.match(part));
 
 	// キャラが見つかったら
 	if (matchChars.length !== 0) {
@@ -144,7 +143,7 @@ function exec($: NovelBase, text: string): Token[] {
 			const part = tmpname.substring(0, j);
 
 			const matchedChars = $.characters
-				.filter(c => match(c, part));
+				.filter(c => c.match(part));
 
 			// キャラが１人見つかったら
 			if (matchedChars.length === 1) {
@@ -199,10 +198,10 @@ function createTextToken(text: string): Token {
 	};
 }
 
-function createCharacterNameToken(text: string, character: ICharacter): INamePartToken {
+function createCharacterNameToken(text: string, char: Character): INamePartToken {
 	return {
 		type: 'character-name',
 		text: text,
-		character: character
+		character: char
 	};
 }

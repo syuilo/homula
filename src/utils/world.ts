@@ -1,4 +1,5 @@
-import { ISeries, ICharacter } from './interfaces';
+import Series from './series';
+import Character from '../character';
 
 /**
  * シリーズとキャラクター情報のデータベース
@@ -6,11 +7,11 @@ import { ISeries, ICharacter } from './interfaces';
  */
 export default class World {
 
-	public series: ISeries[];
+	public series: Series[];
 
-	public characters: ICharacter[];
+	public characters: Character[];
 
-	constructor(series: ISeries[], characters: ICharacter[]) {
+	constructor(series: Series[], characters: Character[]) {
 		this.series = series;
 		this.characters = characters;
 	}
@@ -20,7 +21,7 @@ export default class World {
 	 * @param series シリーズ
 	 * @method World#getAllSeriesCharacters
 	 */
-	public getAllSeriesCharacters(series: ISeries[]): ICharacter[] {
+	public getAllSeriesCharacters(series: Series[]): Character[] {
 		return this.characters.filter(c => {
 			let found = false;
 

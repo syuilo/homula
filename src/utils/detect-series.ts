@@ -1,11 +1,9 @@
-import { ISeries } from './interfaces';
+import Series from './series';
 
 import NovelBase from '../novel-base';
 import Novel from '../novel';
 import ThreadNovel from '../thread-novel';
 import World from './world';
-import askSeries from './ask-series';
-import askCharacter from './ask-character';
 import extractCharacterNamesInText from './extract-character-names-in-text';
 import unModifyTitle from './un-modify-title';
 
@@ -18,7 +16,7 @@ import unModifyTitle from './un-modify-title';
 export default(
 	world: World,
 	$: NovelBase
-): ISeries[] => {
+): Series[] => {
 	const sources: string[] = [];
 
 	switch ($.whoareyou) {
@@ -50,7 +48,7 @@ export default(
 
 	// 登場頻度ランキング
 	const chart: {
-		series: ISeries;
+		series: Series;
 		found: string[]
 	}[] = world.series.map(series => {
 		return {
@@ -66,7 +64,7 @@ export default(
 
 			// キャラがこのSSに登場したらそのキャラのシリーズに+1
 			extractedNames.forEach(name => {
-				if (!askCharacter(char, name)) {
+				if (char.match(name)) {
 					return;
 				}
 
@@ -107,7 +105,7 @@ export default(
 			: world.series
 				.filter(series =>
 					textInBrackets.map(text =>
-						askSeries(series, text)
+						series.match(text)
 					).indexOf(true) !== -1)
 				[0];
 

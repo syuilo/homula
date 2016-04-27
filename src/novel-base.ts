@@ -1,4 +1,4 @@
-import { ICharacter } from './interfaces';
+import Character from './character';
 import CharMap from './charmap';
 
 // SEE: https://github.com/Microsoft/TypeScript/issues/8307
@@ -14,7 +14,7 @@ abstract class NovelBase {
 	public id: string;
 	public title: string;
 	public isCross: boolean;
-	public characters: ICharacter[];
+	public characters: Character[];
 }
 
 /**
@@ -28,11 +28,12 @@ export abstract class NovelContextBase {
 
 	/**
 	 * このSSに登場するキャラクター
+	 * @member NovelContextBase.characters
 	 */
-	public characters: ICharacter[] = null;
+	public characters: Character[] = null;
 
 	constructor(
-		characters: ICharacter[]
+		characters: Character[]
 	) {
 		this.characters = characters;
 		this.charMap = new CharMap(characters);

@@ -1,4 +1,4 @@
-import { ICharacter } from '../interfaces';
+import Character from '../character';
 
 import CharacterIdentity from './character-identity';
 import removeWhiteSpaces from './string/remove-white-spaces';
@@ -11,7 +11,7 @@ import katakanaToHiragana from './string/katakana-to-hiragana';
  * @param name 名前
  * @return CharacterIdentity
  */
-export default (character: ICharacter, name: string): CharacterIdentity => {
+export default (character: Character, name: string): CharacterIdentity => {
 	// 完全一致
 	if (match(name)) {
 		return instantiation();

@@ -1,6 +1,6 @@
 const assign = require('assign-deep');
 
-import { IPost } from './interfaces';
+import { Post } from '../../thread-novel';
 
 /**
  * 本文と思われる投稿をマークします(弱)
@@ -8,7 +8,7 @@ import { IPost } from './interfaces';
  * @return マーク情報が付加された投稿の配列
  */
 export default
-	<T extends IPost & {
+	<T extends Post & {
 		user: {
 			trip: string
 		}

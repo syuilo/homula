@@ -1,4 +1,4 @@
-import { ICharacter } from '../interfaces';
+import Character from '../character';
 
 /* Note:
  * 単に「ID(アイディー)」と呼ぶとデータベースのインデックスとしてのIDと紛らわしくなるので アイデンティティ と呼びます。
@@ -10,13 +10,13 @@ import { ICharacter } from '../interfaces';
  */
 export default class CharacterIdentity {
 
-	public character: ICharacter;
+	public character: Character;
 	public id: string;
 	public name: string;
 
-	constructor(character: ICharacter, name: string);
-	constructor(character: ICharacter, name: string, id: string);
-	constructor(character: ICharacter, name: string, id?: string) {
+	constructor(character: Character, name: string);
+	constructor(character: Character, name: string, id: string);
+	constructor(character: Character, name: string, id?: string) {
 		this.character = character;
 		this.name = name;
 
