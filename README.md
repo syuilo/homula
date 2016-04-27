@@ -18,6 +18,9 @@ npm install homula
 ```
 
 ## Usage
+
+### Basic
+
 ``` js
 import * as homula from '../main';
 
@@ -47,6 +50,35 @@ const ctx = novel.analyze();
 
 // e.g. Generate HTML
 const html = ctx.toHtml();
+```
+
+### Detect series
+Homula can detect a series(ゆるゆり, まどマギ, ごちうさ, etc etc...) of any contents.
+To do the detect, you must have a database of all of the series.
+
+``` js
+// Init a novel instance that detect
+const novel = new homula.Novel({
+	title: '櫻子「ナデナデシテー」',
+	text: '＜向日葵の家＞\n\n櫻子「向日葵～……」\n\n向日葵「何ですの？」\n\n...'
+});
+
+const allseries = [
+	{
+		id: 'a',
+		title: '魔法少女まどか☆マギカ',
+		aliases: ['まどか☆マギカ', 'まどマギ'],
+		characters: ...
+	}, {
+		id: 'b',
+		title: 'ゆるゆり',
+		aliases: null,
+		characters: ...
+	},
+	...
+];
+
+const series = homula.utils.detectSeries(novel, allseries);
 ```
 
 ## License
