@@ -1,6 +1,5 @@
 import Series from './series';
 
-import NovelBase from '../novel-base';
 import Novel from '../novel';
 import ThreadNovel from '../thread-novel';
 import World from './world';
@@ -15,7 +14,7 @@ import unModifyTitle from './un-modify-title';
  */
 export default(
 	world: World,
-	$: NovelBase
+	$: Novel | ThreadNovel
 ): Series[] => {
 	const sources: string[] = [];
 

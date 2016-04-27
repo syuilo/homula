@@ -104,6 +104,11 @@ const world = new homula.utils.World(allseries, allchars);
 const series = homula.utils.detectSeries(novel, world);
 ```
 
+## FAQ
+
+### なぜシリーズクラスがキャラクター情報を持つような設計でないの？
+ひとりのキャラクターが、複数の異なる作品に登場するケースがあるからです(多対多)。
+
 ## License
 [MIT](LICENSE)
 

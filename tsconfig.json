@@ -45,6 +45,7 @@
 		"./src/utils/identity.ts",
 		"./src/utils/modify-is-aa.ts",
 		"./src/utils/n-sin-generator.ts",
+		"./src/utils/series-character.ts",
 		"./src/utils/series.ts",
 		"./src/utils/string/hankakukatakana-to-zenkakukatakana.ts",
 		"./src/utils/string/katakana-to-hiragana.ts",
