@@ -7,6 +7,8 @@ export interface Post {
 	user: {
 		name: string;
 		id: string;
+		backgroundColor: string;
+		foregroundColor: string
 	};
 }
 

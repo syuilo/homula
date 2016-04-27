@@ -1,23 +1,14 @@
-const assign = require('assign-deep');
-
-import { IPost } from './interfaces';
+import { Post } from '../../thread-novel';
 
 // SEE: http://dic.nicovideo.jp/a/%E3%83%88%E3%83%AA%E3%83%83%E3%83%97#h2-2
 const tripSymbol = '◆';
 
 /**
- * 投稿に投稿のトリップ情報を付加します
+ * 投稿のトリップ情報を取得します
  * @param post 投稿
- * @return トリップ情報が付加された投稿
+ * @return トリップ
  */
-export default
-	<T extends IPost>
-	(post: T):
-	T & {
-		user: {
-			trip: string;
-		}
-	} => {
+export default(post: Post): string => {
 
 	let trip: string;
 
@@ -27,9 +18,5 @@ export default
 		trip = null;
 	}
 
-	return assign(post, {
-		user: {
-			trip: trip
-		}
-	});
+	return trip;
 }

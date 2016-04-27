@@ -1,8 +1,8 @@
 const assign = require('assign-deep');
 
-import { ISS, IPost } from './interfaces';
-import Token from '../tokenizer/token';
-import { IAnchorToken } from '../tokenizer/rules/anchor';
+import { ThreadNovelContext } from '../../thread-novel';
+import Token from '../../tokenizer/token';
+import { IAnchorToken } from '../../tokenizer/rules/anchor';
 import extractAnchors from './extract-anchors';
 
 /**
@@ -12,11 +12,10 @@ import extractAnchors from './extract-anchors';
  * @return マーク情報が付加された投稿の配列
  */
 export default
-	<T extends IPost & {
-		isMaster: boolean;
+	<T extends ThreadNovelContext & {
 		tokens: Token[]
 	}>
-	(ss: ISS, posts: T[]):
+	(novel: T):
 	(T & {
 		isAnchor: boolean
 	})[] => {
@@ -25,7 +24,7 @@ export default
 	const anchors: string[] = [];
 
 	// 本文だけ
-	posts.filter(p => p.isMaster).forEach(p => {
+	novel.posts.filter(p => p.isMaster).forEach(p => {
 		// 名前が安価している場合もある
 		const nameMatch = extractAnchors(p.user.name);
 		if (nameMatch !== null) {
@@ -39,7 +38,7 @@ export default
 	});
 
 	// SSのタイトル自体が安価している場合もある
-	const titileMatch = extractAnchors(ss.title);
+	const titileMatch = extractAnchors(novel.title);
 	if (titileMatch !== null) {
 		titileMatch.forEach(a => anchors.push(a.substr(2)));
 	}
@@ -57,7 +56,7 @@ export default
 
 	const marked = <(T & {
 		isAnchor: boolean;
-	})[]>posts.map(post => {
+	})[]>novel.posts.map(post => {
 		let isAnchor = false;
 
 		// 本文から安価されている投稿

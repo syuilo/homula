@@ -16,26 +16,3 @@ abstract class NovelBase {
 	public isCross: boolean;
 	public characters: Character[];
 }
-
-/**
- * 解析済みノベルの基底クラス
- * @class NovelContextBase
- */
-export abstract class NovelContextBase {
-	public whoareyou: string;
-
-	public charMap: CharMap;
-
-	/**
-	 * このSSに登場するキャラクター
-	 * @member NovelContextBase.characters
-	 */
-	public characters: Character[] = null;
-
-	constructor(
-		characters: Character[]
-	) {
-		this.characters = characters;
-		this.charMap = new CharMap(characters);
-	}
-}

@@ -1,9 +1,9 @@
 import * as escape from 'escape-html';
 
-import { NovelContext } from './novel';
+import { NovelContextBase } from './novel-base';
 import Token from './tokenizer/token';
 
-export default function(ctx: NovelContext, tokens: Token[], isAA: boolean): string {
+export default function(ctx: NovelContextBase, tokens: Token[], isAA: boolean): string {
 	if (tokens.length === 0) {
 		return null;
 	}

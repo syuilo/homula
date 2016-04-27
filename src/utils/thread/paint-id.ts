@@ -1,22 +1,14 @@
 const assign = require('assign-deep');
 import * as seedrandom from 'seedrandom';
 
-import { IPost } from './interfaces';
+import { Post } from '../../thread-novel';
 
 /**
  * IDに基づいた背景色と文字色を投稿に付加します
  * @param post 投稿
  * @return IDの背景色と文字色情報が付加された投稿
  */
-export default
-	<T extends IPost>
-	(post: T):
-	T & {
-		user: {
-			backgroundColor: string;
-			foregroundColor: string
-		}
-	} => {
+export default(post: Post): Post => {
 
 	// 各チャンネルの重み
 	const rWeight = 0.298912;
