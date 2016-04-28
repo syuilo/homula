@@ -24,7 +24,7 @@ export type charItem = {
 
 /**
  * CSS用キャラクターマップクラス
- * @class CharMap
+ * @class CharsStyleMap
  */
 export default class {
 	/**

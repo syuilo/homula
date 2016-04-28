@@ -1,11 +1,20 @@
-import NovelBase from './novel-base';
+export interface Novel {
+	id: string;
+	title: string;
+	text: string;
+	type: 'novel';
+}
 
-/**
- * テキストのみのノベル クラス
- * @class Novel
- */
-export default class Novel extends NovelBase {
-	public text: string;
-
-	public whoareyou = 'novel';
+export interface Thread {
+	id: string;
+	title: string;
+	posts: {
+		number: number;
+		text: string;
+		user: {
+			name: string;
+			id: string;
+		};
+	}[];
+	type: 'thread';
 }

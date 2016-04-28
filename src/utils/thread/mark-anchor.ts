@@ -1,6 +1,6 @@
 const assign = require('assign-deep');
 
-import { ThreadNovelContext } from '../../thread-novel';
+import { Thread } from '../../novel';
 import Token from '../../tokenizer/token';
 import { IAnchorToken } from '../../tokenizer/rules/anchor';
 import extractAnchors from './extract-anchors';
@@ -12,12 +12,17 @@ import extractAnchors from './extract-anchors';
  * @return マーク情報が付加された投稿の配列
  */
 export default
-	<T extends ThreadNovelContext & {
-		tokens: Token[]
+	<T extends Thread & {
+		posts: {
+			isMaster: boolean;
+			tokens: Token[];
+		};
 	}>
 	(novel: T):
 	(T & {
-		isAnchor: boolean
+		posts: {
+			isAnchor: boolean;
+		};
 	})[] => {
 
 	// 本文内の安価リスト

@@ -1,6 +1,6 @@
 const assign = require('assign-deep');
 
-import { Post } from '../../thread-novel';
+import { Thread } from '../../novel';
 
 /**
  * 本文と思われる投稿をマークします(弱)
@@ -8,17 +8,21 @@ import { Post } from '../../thread-novel';
  * @return マーク情報が付加された投稿の配列
  */
 export default
-	<T extends Post & {
-		user: {
-			trip: string
-		}
+	<T extends Thread & {
+		posts: {
+			user: {
+				trip: string;
+			};
+		};
 	}>
-	(posts: T[]):
+	(novel: T):
 	(T & {
-		isMaster: boolean
+		posts: {
+			isMaster: boolean;
+		};
 	})[] => {
 
-	return posts.map((post, i) => {
+	novel.posts = novel.posts.map((post, i) => {
 		let isMaster = false;
 
 		// >>1は問答無用で本文
@@ -27,12 +31,12 @@ export default
 		}
 
 		// >>1とIDが同じだったら本文とみて間違いない
-		else if (post.user.id === posts[0].user.id) {
+		else if (post.user.id === novel.posts[0].user.id) {
 			isMaster = true;
 		}
 
 		// トリップ
-		else if (post.user.trip === posts[0].user.trip) {
+		else if (post.user.trip === novel.posts[0].user.trip) {
 			isMaster = true;
 		}
 
@@ -46,11 +50,13 @@ export default
 		});
 	});
 
-	function isSerifs(text: string): boolean {
-		// キャラの台詞と思われる行が5つ以上あったらtrue
-		return text
-			.split('\n')
-			.filter(line => /^(.+?)[「｢『（\(](.+)$/.test(line))
-			.length >= 5;
-	}
+	return novel;
+}
+
+function isSerifs(text: string): boolean {
+	// キャラの台詞と思われる行が5つ以上あったらtrue
+	return text
+		.split('\n')
+		.filter(line => /^(.+?)[「｢『（\(](.+)$/.test(line))
+		.length >= 5;
 }

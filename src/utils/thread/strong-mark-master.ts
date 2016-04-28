@@ -1,10 +1,11 @@
 const assign = require('assign-deep');
 
 import Character from '../../character';
-import { Post } from '../../thread-novel';
+import Series from '../series';
+import { Thread } from '../../novel';
 
-import World from './world';
-import extractNamePartInSerif from './extract-name-part-in-serif';
+import World from '../world';
+import extractNamePartInSerif from '../extract-name-part-in-serif';
 
 /**
  * 本文と思われる投稿をマークします(強)
@@ -14,37 +15,41 @@ import extractNamePartInSerif from './extract-name-part-in-serif';
  * @return マーク情報が付加された投稿の配列
  */
 export default
-	<T extends IPost>
+	<T extends Thread & {
+		posts: {
+			user: {
+				trip: string;
+			};
+		};
+		series: Series[];
+	}>
 	(
 		world: World,
-		posts: (T & {
-			user: {
-				trip: string
-			}
-		})[],
-		series: ISeries[]
+		novel: T
 	):
 	(
 		T & {
-			isMaster: boolean
+			posts: {
+				isMaster: boolean;
+			};
 		}
 	)[] => {
 
 	// シリーズに登場するキャラクター
-	const allchars = world.getAllSeriesCharacters(series);
+	const allchars = world.getAllSeriesCharacters(novel.series);
 
 	// 「シリーズのキャラが登場するSS形式の投稿」かどうか
 	//  ￣￣￣￣￣￣￣￣￣￣￣￣￣
-	const isSerifses = posts.map(post => {
+	const isSerifses = novel.posts.map(post => {
 		return {
 			isSerifs: isSerifs(post.text),
 			user: post.user
 		};
 	});
 
-	const masters: (IUser & { trip: string; })[] = [];
+	const masters: (Thread.user & { trip: string; })[] = [];
 
-	posts.forEach((post, i) => {
+	novel.posts.forEach((post, i) => {
 		const user = post.user;
 
 		if (masters.filter(x => x.id === user.id).length !== 0) {
@@ -75,7 +80,7 @@ export default
 	});
 
 	// スキャン
-	return posts.map(post => {
+	novel.posts = novel.posts.map(post => {
 		const isMaster = (
 			masters
 			.filter(x => x.id === post.user.id)
@@ -86,6 +91,8 @@ export default
 			isMaster
 		});
 	});
+
+	return novel;
 
 	// 与えられたテキストが「シリーズのキャラが登場するSS形式の」文章であるかどうかを判定します。
 	function isSerifs(text: string): boolean {

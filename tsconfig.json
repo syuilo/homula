@@ -26,7 +26,7 @@
 		"./node_modules/typescript/lib/lib.es6.d.ts",
 		"./typings/bundle.d.ts",
 		"./src/character.ts",
-		"./src/charmap.ts",
+		"./src/chars-style-map.ts",
 		"./src/get-characters-statistics.ts",
 		"./src/htmlization.ts",
 		"./src/main.ts",

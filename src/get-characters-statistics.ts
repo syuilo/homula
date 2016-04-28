@@ -1,6 +1,6 @@
-import Novel from './novel';
-import ThreadNovel from './thread-novel';
+import { Novel, Thread } from './novel';
 import Character from './character';
+import Token from './tokenizer/token';
 import { INamePartToken } from './tokenizer/rules/name-part-of-serif';
 
 /**
@@ -9,13 +9,13 @@ import { INamePartToken } from './tokenizer/rules/name-part-of-serif';
  * @param ss SS
  * @return キャラクター情報と登場の割合を含むオブジェクトの配列
  */
-export default function(novel: Novel | ThreadNovel): {
+export default function(novel: Novel & { tokens: Token[] } | Thread & { posts: { tokens: Token[] }}): {
 	id: string;
 	onStageRatio: number;
 }[] {
 	const foundCharacters: Character[] = [];
 
-	switch (novel.whoareyou) {
+	switch (novel.type) {
 	case 'novel':
 		this.tokens
 			.filter((t: INamePartToken) => t.type === 'character-name')
@@ -23,8 +23,8 @@ export default function(novel: Novel | ThreadNovel): {
 				foundCharacters.push(t.character);
 			});
 		break;
-	case 'thread-novel':
-		(<ThreadNovel>novel).posts.forEach(p => {
+	case 'thread':
+		(<Thread>novel).posts.forEach(p => {
 			p.tokens
 			.filter((t: INamePartToken) => t.type === 'character-name')
 			.forEach((t: INamePartToken) => {
