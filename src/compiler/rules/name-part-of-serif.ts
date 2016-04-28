@@ -1,5 +1,5 @@
 import Character from '../../character';
-import NovelBase from '../../novel-base';
+import { INovel } from '../inovel';
 import Token from '../token';
 import CharacterIdentity from '../../utils/character-identity';
 import identity from '../../utils/identity';
@@ -20,7 +20,7 @@ export interface INamePartToken extends Token {
 const separators =
 	['・', '、', '&', '＆', ' '];
 
-function exec($: NovelBase, text: string): Token[] {
+function exec($: INovel, text: string): Token[] {
 	if (this.characters === null || this.characters.length === 0) {
 		return null;
 	}

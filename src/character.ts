@@ -6,8 +6,7 @@ import identity from './utils/identity';
  */
 export default class {
 	id: string;
-	name: string;
-	aliases: string[];
+	name: string[];
 	color: string;
 
 	/**

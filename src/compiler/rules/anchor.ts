@@ -1,4 +1,4 @@
-import NovelBase from '../../novel-base';
+import { INovel } from '../inovel';
 import Token from '../token';
 
 export default {
@@ -10,7 +10,7 @@ export interface IAnchorToken extends Token {
 	target: string;
 }
 
-function exec($: NovelBase, buffer: string): Token[] {
+function exec($: INovel, buffer: string): Token[] {
 	const anchorRegExpMatch = buffer.match(/^(>>|＞＞)([\d-]+)/);
 
 	if (anchorRegExpMatch !== null) {

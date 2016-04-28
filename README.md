@@ -25,21 +25,17 @@ npm install homula
 import * as homula from '../main';
 
 // Init a novel instance
-const novel = new homula.Novel({
+const novel = {
 	title: '櫻子「ナデナデシテー」',
 	text: '＜向日葵の家＞\n\n櫻子「向日葵～……」\n\n向日葵「何ですの？」\n\n...',
 	characters: [{
-		id: 'a',
-		name: '古谷 向日葵',
-		aliases: ['向日葵', 'ひま'],
+		name: ['向日葵', 'ひま'],
 		color: '#416798'
 	}, {
-		id: 'b',
-		name: '大室 櫻子',
-		aliases: ['櫻子', 'さく'],
+		name: ['櫻子', 'さく'],
 		color: '#e2b03a'
 	}]
-});
+};
 
 // Analyze the novel
 const ctx = novel.analyze();

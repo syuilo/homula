@@ -1,6 +1,6 @@
 const BaseN: any = require('basen');
 import Character from './character';
-import NovelBase from './novel-base';
+import { Novel, Thread } from './novel';
 
 /**
  * HTMLにおけるクラス名の全ての桁で使用可能な文字
@@ -55,7 +55,7 @@ export default class {
 	 * このマップに対応するCSS文字列を生成します
 	 * @method CharMap#findById
 	 */
-	public toCSS(novel: NovelBase): string {
+	public toCSS(novel: Novel | Thread): string {
 		return this.chars
 			.map(c => `[data-id='${novel.id}'] .${c.id}{color:${c.color}}`)
 			.join('');

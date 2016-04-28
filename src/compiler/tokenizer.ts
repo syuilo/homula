@@ -1,9 +1,9 @@
-import NovelBase from '../novel-base';
+import { INovel } from './inovel';
 import Token from './token';
 
 export interface IRule {
 	name: string;
-	exec: ($: NovelBase, buffer: string) => Token[];
+	exec: ($: INovel, buffer: string) => Token[];
 }
 
 /**
@@ -11,7 +11,7 @@ export interface IRule {
  * @param
  * @return IToken[]
  */
-export default function($: NovelBase, buffer: string, rules: IRule[]): Token[] {
+export default function($: INovel, buffer: string, rules: IRule[]): Token[] {
 	const tokens: Token[] = [];
 
 	if (buffer === '') {

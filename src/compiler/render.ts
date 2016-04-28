@@ -1,10 +1,9 @@
 import * as escape from 'escape-html';
 
-import { Novel, Thread } from './novel';
-import Token from './tokenizer/token';
-import CharsStyleMap from './chars-style-map';
+import Token from './token';
+import CharsStyleMap from '../chars-style-map';
 
-export default function(novel: Novel | Thread, tokens: Token[], style: CharsStyleMap, isAA: boolean): string {
+export default function(tokens: Token[], style: CharsStyleMap): string {
 	if (tokens.length === 0) {
 		return null;
 	}
@@ -22,10 +21,6 @@ export default function(novel: Novel | Thread, tokens: Token[], style: CharsStyl
 			return '';
 		}
 	}).join('');
-
-	if (isAA) {
-		html = `<pre>${html}</pre>`;
-	}
 
 	return html;
 }
