@@ -5,6 +5,7 @@
 [![][travis-badge]][travis-link]
 [![][david-runtime-badge]][david-runtime-link]
 [![][david-dev-badge]][david-dev-link]
+[![][mit-badge]][mit-link]
 
 Homula is an analyzer of Novel of Japanese.
 
@@ -110,3 +111,5 @@ const series = homula.utils.detectSeries(novel, world);
 [david-runtime-badge]: https://img.shields.io/david/syuilo/homula.svg?style=flat-square
 [david-dev-link]: https://david-dm.org/syuilo/homula#info=devDependencies&view=table
 [david-dev-badge]: https://img.shields.io/david/dev/syuilo/homula.svg?style=flat-square
+[mit-link]:  http://opensource.org/licenses/MIT
+[mit-badge]: https://img.shields.io/badge/license-MIT-444444.svg?style=flat-square
