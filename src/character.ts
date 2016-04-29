@@ -1,6 +1,6 @@
 import * as uuid from 'node-uuid';
 
-import identity from './utils/identity';
+import identity from './core/identity';
 
 /**
  * キャラクター

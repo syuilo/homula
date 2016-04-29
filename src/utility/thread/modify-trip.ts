@@ -10,7 +10,7 @@ const tripSymbol: string = '◆';
  * @param post 投稿
  * @return トリップ情報が付加された投稿
  */
-export default
+export default function
 	<T extends Thread>
 	(novel: T):
 	T & {
@@ -19,7 +19,7 @@ export default
 				trip: string;
 			};
 		};
-	} => {
+	} {
 
 	novel.posts = novel.posts.map(post => {
 		let trip: string;

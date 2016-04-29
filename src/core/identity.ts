@@ -4,6 +4,7 @@ import CharacterIdentity from './character-identity';
 import removeWhiteSpaces from './string/remove-white-spaces';
 import hankakukatakanaToZenkakukatakana from './string/hankakukatakana-to-zenkakukatakana';
 import katakanaToHiragana from './string/katakana-to-hiragana';
+import zenkakuToHankaku from './string/zenkaku-to-hankaku';
 
 /**
  * 対象のキャラクターと名前からアイデンティティを生成します。
@@ -101,5 +102,5 @@ export default (character: Character, name: string): CharacterIdentity => {
 }
 
 function normalize(str: string): string {
-	return katakanaToHiragana(hankakukatakanaToZenkakukatakana(removeWhiteSpaces(str)));
+	return zenkakuToHankaku(katakanaToHiragana(hankakukatakanaToZenkakukatakana(removeWhiteSpaces(str))));
 }

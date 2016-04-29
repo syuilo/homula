@@ -1,11 +1,9 @@
-const assign = require('assign-deep');
-
 import Character from '../../character';
-import Series from '../series';
+import Series from '../../core/series';
 import { Thread, ThreadPostUser } from '../../interfaces';
 
-import World from '../world';
-import extractNamePartInSerif from '../extract-name-part-in-serif';
+import World from '../../world';
+import extractNamePartInSerif from '../../core/extract-name-part-in-serif';
 
 /**
  * 本文と思われる投稿をマークします(強)
@@ -14,7 +12,7 @@ import extractNamePartInSerif from '../extract-name-part-in-serif';
  * @param series シリーズ
  * @return マーク情報が付加された投稿の配列
  */
-export default
+export default function
 	<T extends Thread & {
 		posts: {
 			user: {
@@ -33,7 +31,7 @@ export default
 				isMaster: boolean;
 			};
 		}
-	)[] => {
+	)[] {
 
 	// シリーズに登場するキャラクター
 	const allchars = world.getAllSeriesCharacters(novel.series);
@@ -48,7 +46,7 @@ export default
 	});
 
 	const masters: (ThreadPostUser & { trip: string; })[] = [];
-	
+
 	novel.posts.forEach((post, i) => {
 		const user = post.user;
 

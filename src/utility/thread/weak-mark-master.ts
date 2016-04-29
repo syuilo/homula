@@ -1,5 +1,3 @@
-const assign = require('assign-deep');
-
 import { Thread } from '../../interfaces';
 
 /**
@@ -7,7 +5,7 @@ import { Thread } from '../../interfaces';
  * @param posts 投稿の配列
  * @return マーク情報が付加された投稿の配列
  */
-export default
+export default function
 	<T extends Thread & {
 		posts: {
 			user: {
@@ -20,7 +18,7 @@ export default
 		posts: {
 			isMaster: boolean;
 		};
-	}) => {
+	}) {
 
 	novel.posts.forEach((post, i) => {
 		let isMaster = false;
@@ -36,7 +34,7 @@ export default
 		}
 
 		// トリップ
-		else if (post.user.trip === novel.posts[0].user.trip) {
+		else if (post.user.trip !== null && post.user.trip === novel.posts[0].user.trip) {
 			isMaster = true;
 		}
 
@@ -44,7 +42,7 @@ export default
 		else if (isSerifs(post.text)) {
 			isMaster = true;
 		}
-		
+
 		Object.assign(post, {
 			isMaster: isMaster
 		});

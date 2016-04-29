@@ -98,7 +98,7 @@ const novel = {
 	text: '＜向日葵の家＞\n\n櫻子「向日葵～……」\n\n向日葵「何ですの？」\n\n...'
 };
 
-const series = homula.Utility.detectSeries(world, novel)[0];
+const series = homula.Utility.detectSeries(world, novel);
 
 console.log(series.id); // <- b
 ```
