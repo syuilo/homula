@@ -1,4 +1,4 @@
-const BaseN: any = require('basen');
+const BaseN = require('basen');
 import Character from './character';
 import { Novel, Thread } from './novel';
 
@@ -38,7 +38,7 @@ export default class {
 			return {
 				id: c.id,
 				color: c.color,
-				class: baseN(i)
+				class: baseN.encode(i)
 			};
 		});
 	}

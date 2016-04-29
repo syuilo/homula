@@ -20,8 +20,8 @@ export interface INamePartToken extends Token {
 const separators =
 	['・', '、', '&', '＆', ' '];
 
-function exec($: INovel, text: string): Token[] {
-	if (this.characters === null || this.characters.length === 0) {
+function exec(novel: INovel, text: string): Token[] {
+	if (novel.characters === null || novel.characters.length === 0) {
 		return null;
 	}
 
@@ -31,7 +31,7 @@ function exec($: INovel, text: string): Token[] {
 		return null;
 	}
 
-	const matchChars = $.characters
+	const matchChars = novel.characters
 		.filter(c => c.match(part));
 
 	// キャラが見つかったら
@@ -64,7 +64,7 @@ function exec($: INovel, text: string): Token[] {
 
 		// 区切った各キャラ名に対し合致するキャラを取得
 		names.some(n => {
-			const matchChars = $.characters
+			const matchChars = novel.characters
 				.map(c => identity(c, n))
 				.filter(id => id !== null);
 
@@ -142,7 +142,7 @@ function exec($: INovel, text: string): Token[] {
 		for (let j = 1; j < tmpname.length + 1; j++) {
 			const part = tmpname.substring(0, j);
 
-			const matchedChars = $.characters
+			const matchedChars = novel.characters
 				.filter(c => c.match(part));
 
 			// キャラが１人見つかったら

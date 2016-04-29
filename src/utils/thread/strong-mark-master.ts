@@ -48,7 +48,7 @@ export default
 	});
 
 	const masters: (ThreadPostUser & { trip: string; })[] = [];
-
+	
 	novel.posts.forEach((post, i) => {
 		const user = post.user;
 
@@ -80,14 +80,14 @@ export default
 	});
 
 	// スキャン
-	novel.posts = novel.posts.map(post => {
+	novel.posts.forEach(post => {
 		const isMaster = (
 			masters
 			.filter(x => x.id === post.user.id)
 			.length
 		) !== 0;
 
-		return assign(post, {
+		Object.assign(post, {
 			isMaster
 		});
 	});

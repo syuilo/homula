@@ -19,7 +19,7 @@ export default function($: INovel, buffer: string, rules: IRule[]): Token[] {
 	}
 
 	while (buffer !== '') {
-		rules.some(rule => {
+		const some = rules.some(rule => {
 			const tokens = rule.exec($, buffer);
 			if (tokens !== null) {
 				tokens.forEach(pushToken);
@@ -28,6 +28,13 @@ export default function($: INovel, buffer: string, rules: IRule[]): Token[] {
 				return false;
 			}
 		});
+		
+		if (some) {
+			continue;
+		}
+		
+		const token = createTextToken(buffer[0]);
+		pushToken(token);
 	}
 
 	function pushToken(token: Token): void {
