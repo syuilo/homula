@@ -9,6 +9,39 @@
 
 Homula is an analyzer of Novel of Japanese.
 
+```
+まどか「まどまどまど」
+
+ほむら「ほむほむほむ」
+
+まどか(ほむらちゃほむほむ) ほむら「まどか」
+
+まどか(神)「ほむ」 ほむらA「ほ」 ほむらB「む」
+
+マミ・さやか・あんこ「まみまみさやさやあんあん」
+
+マミさやあん「まみまみさやさやあんあん」
+
+マミ「暁美さnまどか「ほむらちゃほむほむ」
+```
+↓
+``` html
+<style>.a{color:#f79286}.b{color:#8f5ab5}.c{color:#f9b30e}.d{color:#52c7c7}.e{color:#e82f36}.f{color:#929292}</style>
+
+<b class=a>まどか</b>「まどまどまど」<br>
+<br>
+<b class=b>ほむら</b>「ほむほむほむ」<br>
+<br>
+<b class=a>まどか</b>(ほむらちゃほむほむ)<b class=b> ほむら</b>「まどか」<br>
+<br>
+<b class=a>まどか(神)</b>「ほむ」<b class=b> ほむらA</b>「ほ」<b class=b> ほむらB</b>「む」<br>
+<br>
+<b class=c>マミ</b>・<b class=d>さやか</b>・<b class=e>あんこ</b>「まみまみさやさやあんあん」<br>
+<br>
+<b class=c>マミ</b><b class=d>さや</b><b class=e>あん</b>「まみまみさやさやあんあん」<br>
+<br>
+<b class=c>マミ</b>「暁美さn<b class=a>まどか</b>「ほむらちゃほむほむ」
+```
 ![](./example.png)
 
 ## Features
