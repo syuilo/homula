@@ -24,6 +24,7 @@ export interface NovelOptions {
 	title: string;
 	text: string;
 	characters: {
+		id: string;
 		name: string[];
 		color: string;
 	}[];
@@ -46,6 +47,10 @@ export class Novel {
 
 	constructor(options: NovelOptions) {
 		this.text = options.text;
+		
+		this.characters = options.characters.map(c => {
+			return new Character(c);
+		});
 		
 		this.charactersStyle = new CharsStyleMap(this.characters);
 
@@ -98,6 +103,7 @@ export interface ThreadOptions {
 		text: string;
 	}[];
 	characters: {
+		id: string;
 		name: string[];
 		color: string;
 	}[];
@@ -122,6 +128,10 @@ export class Thread {
 
 	constructor(options: ThreadOptions) {
 		const posts = options.posts;
+		
+		this.characters = options.characters.map(c => {
+			return new Character(c);
+		});
 		
 		this.charactersStyle = new CharsStyleMap(this.characters);
 
@@ -185,13 +195,13 @@ function calcCharactersStatistics(characters: Character[]): {
 	// 重複したキャラクターを除去
 	const uniqueFoundChars =
 		characters
-		.filter((x, i, self) =>
-			self.map(x => x.id).indexOf(x.id) === i);
+		.filter((c, i, self) =>
+			self.map(c => c.id).indexOf(c.id) === i);
 
 	const returns = uniqueFoundChars.map(char => {
 		// このキャラが何回登場したか
 		const onStageCount =
-			characters.filter(x => x.id.toString() === char.id.toString()).length;
+			characters.filter(c => c.id.toString() === char.id.toString()).length;
 
 		// このキャラの登場の割合は、(このキャラの登場回数 / すべてのキャラの登場回数) で求める
 		const onStageRatio = onStageCount / allCount;

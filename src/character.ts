@@ -8,6 +8,16 @@ export default class {
 	id: string;
 	name: string[];
 	color: string;
+	
+	constructor(options: {
+		id: string;
+		name: string[];
+		color: string;
+	}) {
+		this.id = options.id;
+		this.name = options.name;
+		this.color = options.color;
+	}
 
 	/**
 	 * 名前のアイデンティティがこのキャラクターであるか確認します
