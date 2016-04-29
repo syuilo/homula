@@ -1,6 +1,6 @@
 const assign = require('assign-deep');
 
-import { Thread } from '../../novel';
+import { Thread } from '../../interfaces';
 
 /**
  * アスキーアートであるかどうかを判定します

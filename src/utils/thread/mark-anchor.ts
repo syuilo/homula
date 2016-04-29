@@ -1,6 +1,6 @@
 const assign = require('assign-deep');
 
-import { Thread } from '../../novel';
+import { Thread } from '../../interfaces';
 import Token from '../../compiler/token';
 import { IAnchorToken } from '../../compiler/rules/anchor';
 import extractAnchors from './extract-anchors';

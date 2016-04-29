@@ -1,6 +1,6 @@
 const assign = require('assign-deep');
 
-import { Thread } from '../../novel';
+import { Thread } from '../../interfaces';
 
 // SEE: http://dic.nicovideo.jp/a/%E3%83%88%E3%83%AA%E3%83%83%E3%83%97#h2-2
 const tripSymbol: string = '◆';

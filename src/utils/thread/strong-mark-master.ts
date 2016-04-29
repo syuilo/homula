@@ -2,7 +2,7 @@ const assign = require('assign-deep');
 
 import Character from '../../character';
 import Series from '../series';
-import { Thread } from '../../novel';
+import { Thread, ThreadPostUser } from '../../interfaces';
 
 import World from '../world';
 import extractNamePartInSerif from '../extract-name-part-in-serif';
@@ -47,7 +47,7 @@ export default
 		};
 	});
 
-	const masters: (Thread.user & { trip: string; })[] = [];
+	const masters: (ThreadPostUser & { trip: string; })[] = [];
 
 	novel.posts.forEach((post, i) => {
 		const user = post.user;

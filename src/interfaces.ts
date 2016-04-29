@@ -7,14 +7,18 @@ export interface Novel {
 export interface Thread {
 	id: string;
 	title: string;
-	posts: {
-		number: number;
-		text: string;
-		user: {
-			name: string;
-			id: string;
-		};
-	}[];
+	posts: ThreadPost[];
+}
+
+export interface ThreadPost {
+	number: number;
+	text: string;
+	user: ThreadPostUser;
+}
+
+export interface ThreadPostUser {
+	name: string;
+	id: string;
 }
 
 export function isThread(novel: any): novel is Thread {

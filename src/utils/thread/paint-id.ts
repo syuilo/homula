@@ -1,7 +1,7 @@
 const assign = require('assign-deep');
 import * as seedrandom from 'seedrandom';
 
-import { Thread } from '../../novel';
+import { Thread } from '../../interfaces';
 
 /**
  * IDに基づいた背景色と文字色を投稿に付加します
