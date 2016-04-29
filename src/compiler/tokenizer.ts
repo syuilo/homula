@@ -11,7 +11,7 @@ export interface IRule {
  * @param
  * @return IToken[]
  */
-export default function($: INovel, buffer: string, rules: IRule[]): Token[] {
+export default function(novel: INovel, buffer: string, rules: IRule[]): Token[] {
 	const tokens: Token[] = [];
 
 	if (buffer === '') {
@@ -20,7 +20,7 @@ export default function($: INovel, buffer: string, rules: IRule[]): Token[] {
 
 	while (buffer !== '') {
 		const some = rules.some(rule => {
-			const tokens = rule.exec($, buffer);
+			const tokens = rule.exec(novel, buffer);
 			if (tokens !== null) {
 				tokens.forEach(pushToken);
 				return true;
@@ -28,11 +28,11 @@ export default function($: INovel, buffer: string, rules: IRule[]): Token[] {
 				return false;
 			}
 		});
-		
+
 		if (some) {
 			continue;
 		}
-		
+
 		const token = createTextToken(buffer[0]);
 		pushToken(token);
 	}

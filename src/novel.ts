@@ -20,7 +20,7 @@ import name from './compiler/rules/name-part-of-serif';
 
 export interface OptionsBase {
 	id?: string;
-	title: string;
+	title?: string;
 	characters: {
 		id?: string;
 		name: string[];
@@ -58,6 +58,8 @@ export class Novel {
 
 	constructor(options: NovelOptions) {
 		this.id = options.id === undefined ? null : options.id;
+
+		this.title = options.title || null;
 
 		this.text = options.text;
 
@@ -106,6 +108,15 @@ export class Novel {
 				foundCharacters.push(t.character);
 			});
 
+		// タイトル中
+		if (this.title !== null) {
+			(tokenize(this, this.title, [name]) || [])
+			.filter((t: INamePartToken) => t.type === 'character-name')
+			.forEach((t: INamePartToken) => {
+				foundCharacters.push(t.character);
+			});
+		}
+
 		return calcCharactersStatistics(foundCharacters);
 	}
 }
@@ -139,6 +150,8 @@ export class Thread {
 
 	constructor(options: ThreadOptions) {
 		this.id = options.id === undefined ? null : options.id;
+
+		this.title = options.title || null;
 
 		const posts = options.posts;
 
@@ -193,6 +206,15 @@ export class Thread {
 				foundCharacters.push(t.character);
 			});
 		});
+
+		// タイトル中
+		if (this.title !== null) {
+			(tokenize(this, this.title, [name]) || [])
+			.filter((t: INamePartToken) => t.type === 'character-name')
+			.forEach((t: INamePartToken) => {
+				foundCharacters.push(t.character);
+			});
+		}
 
 		return calcCharactersStatistics(foundCharacters);
 	}

@@ -25,6 +25,10 @@ const serifRegExp = new RegExp(
  * @return キャラクター名部分
  */
 export default (serif: string): string => {
+	if (serif === null || serif === undefined) {
+		throw 'serif is null or undefined';
+	}
+
 	if (serif === '') {
 		return null;
 	}
