@@ -1,6 +1,7 @@
 ![](./homula.png)
 ------------------------------------------------
 
+[![npm version](https://badge.fury.io/js/homula.svg)](https://badge.fury.io/js/homula)
 [![][travis-badge]][travis-link]
 [![][david-runtime-badge]][david-runtime-link]
 [![][david-dev-badge]][david-dev-link]
