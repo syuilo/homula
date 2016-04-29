@@ -86,11 +86,9 @@ export default (character: Character, name: string): CharacterIdentity => {
 	 */
 	function match(query: string): boolean {
 		query = normalize(query);
-		const name = normalize(character.name);
-		const aliases = character.aliases.map(name => normalize(name));
+		const names = character.name.map(name => normalize(name));
 
-		return name === query ||
-			aliases.indexOf(query) !== -1;
+		return names.indexOf(query) !== -1;
 	}
 
 	function instantiation(id?: string): CharacterIdentity {

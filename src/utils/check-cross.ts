@@ -1,19 +1,18 @@
-import Novel from '../novel';
-import ThreadNovel from '../thread-novel';
+import { Novel, Thread } from '../interfaces';
 
 /**
  * クロスオーバーであるかどうかを判定します。
  * @param ss SS
  * @return bool
  */
-export default(novel: Novel | ThreadNovel): boolean => {
-	switch (novel.whoareyou) {
+export default(novel: Novel | Thread): boolean => {
+	switch (novel.type) {
 	case 'novel':
 		return find(novel.title, '【クロス', 'クロス】');
 	case 'thread-novel':
 		return (
 			find(novel.title, '【クロス', 'クロス】') ||
-			find((<ThreadNovel>novel).posts[0].text, 'クロス'));
+			find((<Thread>novel).posts[0].text, 'クロス'));
 	default:
 		throw 'unknown type';
 	}

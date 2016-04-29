@@ -1,7 +1,6 @@
 import Series from './series';
 
-import Novel from '../novel';
-import ThreadNovel from '../thread-novel';
+import { Novel, Thread } from '../interfaces';
 import World from './world';
 import extractCharacterNamesInText from './extract-character-names-in-text';
 import unModifyTitle from './un-modify-title';
@@ -14,18 +13,19 @@ import unModifyTitle from './un-modify-title';
  */
 export default(
 	world: World,
-	$: Novel | ThreadNovel
+	novel: Novel | Thread,
+	isCross: boolean
 ): Series[] => {
 	const sources: string[] = [];
 
-	switch ($.whoareyou) {
+	switch (novel.type) {
 	case 'novel':
-		sources.push((<Novel>$).text);
+		sources.push(novel.text);
 		break;
-	case 'thread-novel':
+	case 'thread':
 		sources.push.apply(sources,
 			// 本文だけ
-			(<ThreadNovel>$).posts
+			novel.posts
 			// SEE: https://github.com/Microsoft/TypeScript/issues/7649
 			.filter(x => (<any>x).isMaster)
 			.map(x => x.text));
@@ -40,7 +40,7 @@ export default(
 			sources
 			// キャラクター名がタイトルに含まれている場合が多い
 			// 【安価】のようにタイトルは装飾されていることも多いので非装飾化
-			.concat(unModifyTitle($.title))
+			.concat(unModifyTitle(novel.title))
 		)
 		// 重複は除去
 		.filter((x, i, self) => self.indexOf(x) === i);
@@ -83,7 +83,7 @@ export default(
 	// シリーズが見つかったら
 	if (chart[0].found.length > 0) {
 		// クロスオーバーかつ第二候補も見つかったら
-		if ($.isCross && chart[1].found.length > 0) {
+		if (isCross && chart[1].found.length > 0) {
 			return [chart[0].series, chart[1].series];
 		}
 
@@ -92,7 +92,7 @@ export default(
 	}
 
 	// タイトル内の【】内の文字列
-	const textInBracketsMatch = $.title.match(/【(.+?)】/g);
+	const textInBracketsMatch = novel.title.match(/【(.+?)】/g);
 	const textInBrackets = textInBracketsMatch === null ? null : textInBracketsMatch
 		.map(x => x.trim())
 		.map(x => x.substr(1, x.length - 2));
