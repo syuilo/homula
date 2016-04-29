@@ -1,6 +1,6 @@
 const assign = require('assign-deep');
 
-import { Thread } from '../../novel';
+import { Thread } from '../../interfaces';
 
 /**
  * 本文と思われる投稿をマークします(弱)
@@ -20,9 +20,9 @@ export default
 		posts: {
 			isMaster: boolean;
 		};
-	})[] => {
+	}) => {
 
-	novel.posts = novel.posts.map((post, i) => {
+	novel.posts.forEach((post, i) => {
 		let isMaster = false;
 
 		// >>1は問答無用で本文
@@ -44,13 +44,17 @@ export default
 		else if (isSerifs(post.text)) {
 			isMaster = true;
 		}
-
-		return assign(post, {
+		
+		Object.assign(post, {
 			isMaster: isMaster
 		});
 	});
 
-	return novel;
+	return <(T & {
+		posts: {
+			isMaster: boolean;
+		};
+	})>novel;
 }
 
 function isSerifs(text: string): boolean {
