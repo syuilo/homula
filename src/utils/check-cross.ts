@@ -1,4 +1,4 @@
-import { Novel, Thread } from '../interfaces';
+import { Novel, Thread, isThread } from '../interfaces';
 
 /**
  * クロスオーバーであるかどうかを判定します。
@@ -6,15 +6,12 @@ import { Novel, Thread } from '../interfaces';
  * @return bool
  */
 export default(novel: Novel | Thread): boolean => {
-	switch (novel.type) {
-	case 'novel':
-		return find(novel.title, '【クロス', 'クロス】');
-	case 'thread-novel':
+	if (isThread(novel)) {
 		return (
 			find(novel.title, '【クロス', 'クロス】') ||
 			find((<Thread>novel).posts[0].text, 'クロス'));
-	default:
-		throw 'unknown type';
+	} else {
+		return find(novel.title, '【クロス', 'クロス】');
 	}
 
 	function find(target: string, ...xs: string[]): boolean {

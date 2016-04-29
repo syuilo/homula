@@ -2,7 +2,6 @@ export interface Novel {
 	id: string;
 	title: string;
 	text: string;
-	type: 'novel';
 }
 
 export interface Thread {
@@ -16,5 +15,8 @@ export interface Thread {
 			id: string;
 		};
 	}[];
-	type: 'thread';
+}
+
+export function isThread(novel: any): novel is Thread {
+	return novel.posts !== undefined;
 }

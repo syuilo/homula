@@ -1,6 +1,6 @@
 import Series from './series';
 
-import { Novel, Thread } from '../interfaces';
+import { Novel, Thread, isThread } from '../interfaces';
 import World from './world';
 import extractCharacterNamesInText from './extract-character-names-in-text';
 import unModifyTitle from './un-modify-title';
@@ -17,21 +17,16 @@ export default(
 	isCross: boolean
 ): Series[] => {
 	const sources: string[] = [];
-
-	switch (novel.type) {
-	case 'novel':
-		sources.push(novel.text);
-		break;
-	case 'thread':
+	
+	if (isThread(novel)) {
 		sources.push.apply(sources,
 			// 本文だけ
 			novel.posts
 			// SEE: https://github.com/Microsoft/TypeScript/issues/7649
 			.filter(x => (<any>x).isMaster)
 			.map(x => x.text));
-		break;
-	default:
-		throw 'unknown type';
+	} else {
+		sources.push(novel.text);
 	}
 
 	// SS内に登場するすべてのキャラクター名(と思われる文字列)を抽出
