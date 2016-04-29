@@ -19,6 +19,7 @@ import anchor from './compiler/rules/anchor';
 import name from './compiler/rules/name-part-of-serif';
 
 export interface OptionsBase {
+	id?: string;
 	title: string;
 	characters: {
 		id?: string;
@@ -26,6 +27,11 @@ export interface OptionsBase {
 		color: string;
 	}[];
 }
+
+export type CharactersStatistics = {
+	id: string;
+	onStageRatio: number;
+}[];
 
 // ----------------------------------------------------------------
 // Basic
@@ -51,8 +57,10 @@ export class Novel {
 	type: 'novel';
 
 	constructor(options: NovelOptions) {
+		this.id = options.id === undefined ? null : options.id;
+
 		this.text = options.text;
-		
+
 		this.characters = options.characters.map(c => {
 			return new Character({
 				id: c.id === undefined ? uuid.v4() : c.id,
@@ -60,7 +68,7 @@ export class Novel {
 				color: c.color
 			});
 		});
-		
+
 		this.charactersStyle = new CharsStyleMap(this.characters);
 
 		this.tokens = tokenize({
@@ -76,7 +84,7 @@ export class Novel {
 	public toHtml(): string {
 		return render(this.tokens, this.charactersStyle);
 	}
-	
+
 	/**
 	 * このノベル本文のCSSを取得します
 	 * @method Novel#getCSS
@@ -84,12 +92,12 @@ export class Novel {
 	public getCSS(): string {
 		return this.charactersStyle.toCSS(this);
 	}
-	
+
 	/**
 	 * キャラクターの統計を取得します
 	 * @method Novel#getCharactersStatistics
 	 */
-	public getCharactersStatistics() {
+	public getCharactersStatistics(): CharactersStatistics {
 		const foundCharacters: Character[] = [];
 
 		this.tokens
@@ -97,7 +105,7 @@ export class Novel {
 			.forEach((t: INamePartToken) => {
 				foundCharacters.push(t.character);
 			});
-		
+
 		return calcCharactersStatistics(foundCharacters);
 	}
 }
@@ -130,8 +138,10 @@ export class Thread {
 	type: 'novel';
 
 	constructor(options: ThreadOptions) {
+		this.id = options.id === undefined ? null : options.id;
+
 		const posts = options.posts;
-		
+
 		this.characters = options.characters.map(c => {
 			return new Character({
 				id: c.id === undefined ? uuid.v4() : c.id,
@@ -139,7 +149,7 @@ export class Thread {
 				color: c.color
 			});
 		});
-		
+
 		this.charactersStyle = new CharsStyleMap(this.characters);
 
 		this.posts = posts.map(p => {
@@ -160,7 +170,7 @@ export class Thread {
 	public toHtml(): string[] {
 		return this.posts.map(p => render(p.tokens, this.charactersStyle));
 	}
-	
+
 	/**
 	 * このノベル本文のCSSを取得します
 	 * @method Thread#getCSS
@@ -168,12 +178,12 @@ export class Thread {
 	public getCSS(): string {
 		return this.charactersStyle.toCSS(this);
 	}
-	
+
 	/**
 	 * キャラクターの統計を取得します
 	 * @method Thread#getCharactersStatistics
 	 */
-	public getCharactersStatistics() {
+	public getCharactersStatistics(): CharactersStatistics {
 		const foundCharacters: Character[] = [];
 
 		this.posts.forEach(p => {
@@ -183,7 +193,7 @@ export class Thread {
 				foundCharacters.push(t.character);
 			});
 		});
-		
+
 		return calcCharactersStatistics(foundCharacters);
 	}
 }
@@ -192,10 +202,7 @@ export class Thread {
 // Common
 // ================================================================
 
-function calcCharactersStatistics(characters: Character[]): {
-	id: string;
-	onStageRatio: number;
-}[] {
+function calcCharactersStatistics(characters: Character[]): CharactersStatistics {
 	// すべてのキャラの登場回数
 	const allCount = characters.length;
 

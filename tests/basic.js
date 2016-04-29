@@ -22,9 +22,14 @@ describe('basic', () => {
 	});
 
 	it('compile to HTML', () => {
-		// Compile
 		const html = novel.toHtml();
 
 		should.equal(html, '＜向日葵の家＞<br><br><b class=b>櫻子</b>「向日葵～……」<br><br><b class=a>向日葵</b>「何ですの？」<br><br>...');
+	});
+
+	it('get style', () => {
+		const css = novel.getCSS();
+
+		should.equal(css, '.a{color:#416798}.b{color:#e2b03a}');
 	});
 });

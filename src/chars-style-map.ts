@@ -57,7 +57,13 @@ export default class {
 	 */
 	public toCSS(novel: Novel | Thread): string {
 		return this.chars
-			.map(c => `[data-id='${novel.id}'] .${c.id}{color:${c.color}}`)
+			.map(c => {
+				if (novel.id === null) {
+					return `.${c.class}{color:${c.color}}`;
+				} else {
+					return `[data-id='${novel.id}'] .${c.class}{color:${c.color}}`;
+				}
+			})
 			.join('');
 	}
 }
