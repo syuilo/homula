@@ -1,24 +1,28 @@
 'use strict';
 
-const should = require('should');
-
 const fs = require('fs');
 
 require.extensions['.html'] = (module, filename) => {
 	module.exports = fs.readFileSync(filename, 'utf8');
 };
 
+require.extensions['.css'] = (module, filename) => {
+	module.exports = fs.readFileSync(filename, 'utf8');
+};
+
+const should = require('should');
+
 const homula = require('../built/main');
 
 const allseries = require('./examples/series.json');
 const allchars = require('./examples/characters.json');
-
-let novel = require('./examples/ss/runba.json');
-const built = require('./examples/ss/runba.built.html');
+const world = new homula.World(allseries, allchars);
 
 describe('thread', () => {
 
-	const world = new homula.World(allseries, allchars);
+	let novel = require('./examples/ss/runba.json');
+	const builthtml = require('./examples/ss/runba.built.html');
+	const builtcss = require('./examples/ss/runba.built.css');
 
 	it('modify trips', () => {
 		novel = homula.Utility.modifyTrip(novel);
@@ -47,14 +51,13 @@ describe('thread', () => {
 	it('compile to HTML', () => {
 		const html = novel.toHtml().join('<hr>');
 
-		should.equal(html, built);
+		should.equal(html, builthtml);
 	});
 
 	it('get style', () => {
 		const css = novel.getCSS();
 
-		should.equal(css,
-			'.a{color:#f79286}.b{color:#8f5ab5}.c{color:#929292}');
+		should.equal(css, builtcss);
 	});
 
 	it('get characters statistics', () => {

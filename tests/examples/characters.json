@@ -9,6 +9,18 @@
 		"color": "#8f5ab5"
 	}, {
 		"series": "a",
+		"name": ["マミ"],
+		"color": "#f9b30e"
+	}, {
+		"series": "a",
+		"name": ["さやか", "さや"],
+		"color": "#52c7c7"
+	}, {
+		"series": "a",
+		"name": ["杏子", "あんこ", "あん"],
+		"color": "#e82f36"
+	}, {
+		"series": "a",
 		"name": ["キュゥべえ", "QB"],
 		"color": "#929292"
 	}, {

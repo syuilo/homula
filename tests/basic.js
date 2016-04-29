@@ -1,8 +1,22 @@
 'use strict';
 
+const fs = require('fs');
+
+require.extensions['.html'] = (module, filename) => {
+	module.exports = fs.readFileSync(filename, 'utf8');
+};
+
+require.extensions['.css'] = (module, filename) => {
+	module.exports = fs.readFileSync(filename, 'utf8');
+};
+
 const should = require('should');
 
 const homula = require('../built/main');
+
+const allseries = require('./examples/series.json');
+const allchars = require('./examples/characters.json');
+const world = new homula.World(allseries, allchars);
 
 describe('basic', () => {
 	let novel;
@@ -40,5 +54,39 @@ describe('basic', () => {
 
 		should.equal(statistics[0].onStageRatio,
 			0.6666666666666666);
+	});
+});
+
+describe('advance', () => {
+	let novel = require('./examples/ss/test.json');
+	const builthtml = require('./examples/ss/test.built.html');
+	const builtcss = require('./examples/ss/test.built.css');
+
+	let series;
+
+	it('detect', () => {
+		series = homula.Utility.detectSeries(world, novel);
+
+		should.equal(series.id, 'a');
+	});
+
+	it('analyze', () => {
+		novel = new homula.Novel({
+			title: novel.title,
+			text: novel.text,
+			characters: world.getAllSeriesCharacters([series])
+		});
+	});
+
+	it('compile to HTML', () => {
+		const html = novel.toHtml();
+
+		should.equal(html, builthtml);
+	});
+
+	it('get style', () => {
+		const css = novel.getCSS();
+
+		should.equal(css, builtcss);
 	});
 });
