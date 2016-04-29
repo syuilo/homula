@@ -1,12 +1,12 @@
 export interface Novel {
 	id: string;
-	title: string;
+	title?: string;
 	text: string;
 }
 
 export interface Thread {
 	id: string;
-	title: string;
+	title?: string;
 	posts: ThreadPost[];
 }
 

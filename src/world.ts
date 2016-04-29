@@ -1,19 +1,32 @@
-import Series from './series';
-import Character from './series-character';
+import Series from './core/series';
+import Character from './core/series-character';
 
 /**
  * シリーズとキャラクター情報のデータベース
  * @class World
  */
-export default class World {
+export default class {
 
 	public series: Series[];
 
 	public characters: Character[];
 
-	constructor(series: Series[], characters: Character[]) {
-		this.series = series;
-		this.characters = characters;
+	constructor(series: {
+		id: string;
+		title: string | string[];
+	}[], characters: {
+		id: string;
+		name: string[];
+		color: string;
+		series: string | string[];
+	}[]) {
+		this.series = series.map(s => {
+			return new Series(s);
+		});
+
+		this.characters = characters.map(c => {
+			return new Character(c);
+		});
 	}
 
 	/**

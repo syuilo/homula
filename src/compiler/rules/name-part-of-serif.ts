@@ -1,9 +1,9 @@
 import Character from '../../character';
 import { INovel } from '../inovel';
 import Token from '../token';
-import CharacterIdentity from '../../utils/character-identity';
-import identity from '../../utils/identity';
-import extractNamePart from '../../utils/extract-name-part-in-serif';
+import CharacterIdentity from '../../core/character-identity';
+import identity from '../../core/identity';
+import extractNamePart from '../../core/extract-name-part-in-serif';
 
 export default {
 	name: 'name-part-of-serif',

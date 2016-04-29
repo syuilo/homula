@@ -1,7 +1,6 @@
 {
 	"rules": {
 		"align": [true,
-			"parameters",
 			"statements"
 		],
 		"ban": false,
@@ -43,7 +42,7 @@
 		"no-duplicate-variable": true,
 		"no-empty": true,
 		"no-eval": true,
-		"no-internal-module": true,
+		"no-internal-module": false,
 		"no-require-imports": false,
 		"no-string-literal": false,
 		"no-switch-case-fall-through": true,

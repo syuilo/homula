@@ -5,3 +5,6 @@
  */
 
 export { Novel, Thread } from './novel';
+
+export { default as World } from './world';
+export { Utility } from './utility';
