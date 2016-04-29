@@ -1,4 +1,4 @@
-import Series from './core/series';
+import Series from './utility/series';
 import Character from './core/series-character';
 
 /**
