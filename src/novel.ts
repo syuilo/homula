@@ -1,3 +1,10 @@
+// ================================================================
+// CORE CLASSES
+//
+// basic ... 基本
+// thread ... スレッド形式
+// ================================================================
+
 import Character from './character';
 import CharsStyleMap from './chars-style-map';
 
@@ -9,9 +16,9 @@ import { INamePartToken } from './compiler/rules/name-part-of-serif';
 import anchor from './compiler/rules/anchor';
 import name from './compiler/rules/name-part-of-serif';
 
-// ================================================================
+// ----------------------------------------------------------------
 // Basic
-// ================================================================
+// ----------------------------------------------------------------
 
 export interface NovelOptions {
 	title: string;
@@ -81,9 +88,9 @@ export class Novel {
 	}
 }
 
-// ================================================================
+// ----------------------------------------------------------------
 // Thread
-// ================================================================
+// ----------------------------------------------------------------
 
 export interface ThreadOptions {
 	title: string;
@@ -168,23 +175,23 @@ export class Thread {
 // Common
 // ================================================================
 
-function calcCharactersStatistics(foundCharacters: Character[]): {
+function calcCharactersStatistics(characters: Character[]): {
 	id: string;
 	onStageRatio: number;
 }[] {
 	// すべてのキャラの登場回数
-	const allCount = foundCharacters.length;
+	const allCount = characters.length;
 
 	// 重複したキャラクターを除去
 	const uniqueFoundChars =
-		foundCharacters
+		characters
 		.filter((x, i, self) =>
 			self.map(x => x.id).indexOf(x.id) === i);
 
 	const returns = uniqueFoundChars.map(char => {
 		// このキャラが何回登場したか
 		const onStageCount =
-			foundCharacters.filter(x => x.id.toString() === char.id.toString()).length;
+			characters.filter(x => x.id.toString() === char.id.toString()).length;
 
 		// このキャラの登場の割合は、(このキャラの登場回数 / すべてのキャラの登場回数) で求める
 		const onStageRatio = onStageCount / allCount;
