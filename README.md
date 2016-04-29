@@ -9,6 +9,8 @@
 
 Homula is an analyzer of Novel of Japanese.
 
+![](./example.png)
+
 ## Features
 * Series inference
 * Characters statistics
