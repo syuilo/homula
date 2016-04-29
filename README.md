@@ -1,7 +1,7 @@
 ![](./homula.png)
 ------------------------------------------------
 
-[![npm version](https://badge.fury.io/js/homula.svg)](https://badge.fury.io/js/homula)
+[![][npm-badge]][npm-link]
 [![][travis-badge]][travis-link]
 [![][david-runtime-badge]][david-runtime-link]
 [![][david-dev-badge]][david-dev-link]
@@ -102,8 +102,10 @@ const series = homula.utils.detectSeries(novel, world);
 ## License
 [MIT](LICENSE)
 
+[npm-link]: https://www.npmjs.com/package/homula
+[npm-badge]: https://img.shields.io/npm/v/homula.svg?style=flat-square
 [travis-link]: https://travis-ci.org/syuilo/homula
-[travis-badge]: http://img.shields.io/travis/syuilo/homula.svg?style=flat-square
+[travis-badge]: https://img.shields.io/travis/syuilo/homula.svg?style=flat-square
 [david-runtime-link]: https://david-dm.org/syuilo/homula#info=dependencies&view=table
 [david-runtime-badge]: https://img.shields.io/david/syuilo/homula.svg?style=flat-square
 [david-dev-link]: https://david-dm.org/syuilo/homula#info=devDependencies&view=table
