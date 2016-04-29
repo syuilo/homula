@@ -13,6 +13,10 @@ Homula is an analyzer of Novel of Japanese.
 * Series inference
 * Characters statistics
 * Compile to HTML
+* Thread utilities
+  * Anchor tracking
+  * Extract trips
+  * Extract master posts
 
 ## Install
 ``` bash
