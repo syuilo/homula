@@ -69,15 +69,15 @@ const allseries = [
 
 const allchars = [
 	{
-		series: ['a']
+		series: ['a'],
 		name: ['まどか', 'まど'],
 		color: '#f79286'
 	}, {
-		series: ['a']
+		series: ['a'],
 		name: ['ほむら', 'ほむ', 'ほむほむ'],
 		color: '#8f5ab5'
 	}, {
-		series: ['b']
+		series: ['b'],
 		name: ['あかり', 'あか'],
 		color: '#ff2445'
 	},
