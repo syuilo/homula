@@ -69,22 +69,16 @@ const allseries = [
 
 const allchars = [
 	{
-		id: 'a',
 		series: ['a']
-		name: '鹿目 まどか',
-		aliases: ['まどか', 'まど'],
+		name: ['まどか', 'まど'],
 		color: '#f79286'
 	}, {
-		id: 'b',
 		series: ['a']
-		name: '暁美 ほむら',
-		aliases: ['ほむら', 'ほむ', 'ほむほむ'],
+		name: ['ほむら', 'ほむ', 'ほむほむ'],
 		color: '#8f5ab5'
 	}, {
-		id: 'c',
 		series: ['b']
-		name: '赤座 あかり',
-		aliases: ['あかり', 'あか'],
+		name: ['あかり', 'あか'],
 		color: '#ff2445'
 	},
 	...
@@ -94,11 +88,6 @@ const world = new homula.utils.World(allseries, allchars);
 
 const series = homula.utils.detectSeries(novel, world);
 ```
-
-## FAQ
-
-### なぜシリーズクラスがキャラクター情報を持つような設計でないの？
-ひとりのキャラクターが、複数の異なる作品に登場するケースがあるからです(多対多)。
 
 ## License
 [MIT](LICENSE)
