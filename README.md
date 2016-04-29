@@ -91,7 +91,7 @@ const allchars = [
 const world = new homula.World(allseries, allchars);
 ```
 
-**Now, we can detect a novel:**
+**Now, we can detect series of a novel:**
 ``` js
 const novel = {
 	title: '櫻子「ナデナデシテー」',
