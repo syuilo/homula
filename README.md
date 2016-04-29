@@ -47,12 +47,8 @@ const html = novel.toHtml();
 Homula can detect a series(ゆるゆり, まどマギ, ごちうさ, etc etc...) of any contents.
 To do the detect, you must have a database of all of the series.
 
+**Database definition:**
 ``` js
-const novel = {
-	title: '櫻子「ナデナデシテー」',
-	text: '＜向日葵の家＞\n\n櫻子「向日葵～……」\n\n向日葵「何ですの？」\n\n...'
-};
-
 const allseries = [
 	{
 		id: 'a',
@@ -93,6 +89,14 @@ const allchars = [
 ];
 
 const world = new homula.World(allseries, allchars);
+```
+
+**Now, we can detect a novel:**
+``` js
+const novel = {
+	title: '櫻子「ナデナデシテー」',
+	text: '＜向日葵の家＞\n\n櫻子「向日葵～……」\n\n向日葵「何ですの？」\n\n...'
+};
 
 const series = homula.Utility.detectSeries(world, novel)[0];
 
