@@ -47,6 +47,7 @@
 		"./src/interfaces.ts",
 		"./src/main.ts",
 		"./src/novel.ts",
+		"./src/novel-base.ts",
 		"./src/utility/detect-series.ts",
 		"./src/utility/series.ts",
 		"./src/utility/thread/extract-anchors.ts",
