@@ -31,6 +31,62 @@ export type CharactersStatistics = {
 	onStageRatio: number;
 }[];
 
+/**
+ * ノベル基底クラス
+ */
+export abstract class NovelBase {
+	id: string;
+	title: string;
+	characters: Character[];
+	charactersStyle: CharsStyleMap;
+
+	constructor(options: OptionsBase) {
+		this.id = options.id === undefined ? null : options.id;
+
+		this.title = options.title || null;
+	}
+
+	/**
+	 * キャラクターの統計を計算します
+	 */
+	protected calcCharactersStatistics(characters: Character[]): CharactersStatistics {
+		// すべてのキャラの登場回数
+		const allCount = characters.length;
+
+		// 重複したキャラクターを除去
+		const uniqueFoundChars =
+			characters
+			.filter((c, i, self) =>
+				self.map(c => c.id).indexOf(c.id) === i);
+
+		const returns = uniqueFoundChars.map(char => {
+			// このキャラが何回登場したか
+			const onStageCount =
+				characters.filter(c => c.id.toString() === char.id.toString()).length;
+
+			// このキャラの登場の割合は、(このキャラの登場回数 / すべてのキャラの登場回数) で求める
+			const onStageRatio = onStageCount / allCount;
+
+			return {
+				id: char.id,
+				onStageRatio: onStageRatio
+			};
+		})
+		// 登場頻度で降順ソート
+		.sort((a, b) => {
+			if (a.onStageRatio > b.onStageRatio) {
+				return -1;
+			} else if (a.onStageRatio < b.onStageRatio) {
+				return 1;
+			} else {
+				return 0;
+			}
+		});
+
+		return returns;
+	}
+}
+
 // ----------------------------------------------------------------
 // Basic
 // ----------------------------------------------------------------
@@ -43,21 +99,15 @@ export interface NovelOptions extends OptionsBase {
  * ノベルクラス
  * @class Novel
  */
-export class Novel {
-	id: string;
-	title: string;
+export class Novel extends NovelBase {
 	text: string;
 	tokens: Token[];
-	characters: Character[];
-	charactersStyle: CharsStyleMap;
-
+	
 	// type of myself
 	type: 'novel';
 
 	constructor(options: NovelOptions) {
-		this.id = options.id === undefined ? null : options.id;
-
-		this.title = options.title || null;
+		super(options);
 
 		this.text = options.text;
 
@@ -111,7 +161,7 @@ export class Novel {
 			});
 		}
 
-		return calcCharactersStatistics(foundCharacters);
+		return this.calcCharactersStatistics(foundCharacters);
 	}
 }
 
@@ -129,7 +179,7 @@ export interface ThreadOptions extends OptionsBase {
  * ノベルクラス
  * @class Thread
  */
-export class Thread {
+export class Thread extends NovelBase {
 	id: string;
 	title: string;
 	posts: {
@@ -143,9 +193,7 @@ export class Thread {
 	type: 'novel';
 
 	constructor(options: ThreadOptions) {
-		this.id = options.id === undefined ? null : options.id;
-
-		this.title = options.title || null;
+		super(options);
 
 		const posts = options.posts;
 
@@ -206,47 +254,6 @@ export class Thread {
 			});
 		}
 
-		return calcCharactersStatistics(foundCharacters);
+		return this.calcCharactersStatistics(foundCharacters);
 	}
-}
-
-// ================================================================
-// Common
-// ================================================================
-
-function calcCharactersStatistics(characters: Character[]): CharactersStatistics {
-	// すべてのキャラの登場回数
-	const allCount = characters.length;
-
-	// 重複したキャラクターを除去
-	const uniqueFoundChars =
-		characters
-		.filter((c, i, self) =>
-			self.map(c => c.id).indexOf(c.id) === i);
-
-	const returns = uniqueFoundChars.map(char => {
-		// このキャラが何回登場したか
-		const onStageCount =
-			characters.filter(c => c.id.toString() === char.id.toString()).length;
-
-		// このキャラの登場の割合は、(このキャラの登場回数 / すべてのキャラの登場回数) で求める
-		const onStageRatio = onStageCount / allCount;
-
-		return {
-			id: char.id,
-			onStageRatio: onStageRatio
-		};
-	})
-	// 登場頻度で降順ソート
-	.sort((a, b) => {
-		if (a.onStageRatio > b.onStageRatio) {
-			return -1;
-		} else if (a.onStageRatio < b.onStageRatio) {
-			return 1;
-		} else {
-			return 0;
-		}
-	});
-
-	return returns;
 }
