@@ -5,8 +5,6 @@
 // thread ... スレッド形式
 // ================================================================
 
-import * as uuid from 'node-uuid';
-
 import Character from './character';
 import CharsStyleMap from './chars-style-map';
 
@@ -64,11 +62,7 @@ export class Novel {
 		this.text = options.text;
 
 		this.characters = options.characters.map(c => {
-			return new Character({
-				id: c.id === undefined ? uuid.v4() : c.id,
-				name: c.name,
-				color: c.color
-			});
+			return new Character(c);
 		});
 
 		this.charactersStyle = new CharsStyleMap(this.characters);
@@ -156,11 +150,7 @@ export class Thread {
 		const posts = options.posts;
 
 		this.characters = options.characters.map(c => {
-			return new Character({
-				id: c.id === undefined ? uuid.v4() : c.id,
-				name: c.name,
-				color: c.color
-			});
+			return new Character(c);
 		});
 
 		this.charactersStyle = new CharsStyleMap(this.characters);

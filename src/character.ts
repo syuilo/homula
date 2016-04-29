@@ -1,3 +1,5 @@
+import * as uuid from 'node-uuid';
+
 import identity from './utils/identity';
 
 /**
@@ -8,13 +10,13 @@ export default class {
 	id: string;
 	name: string[];
 	color: string;
-	
+
 	constructor(options: {
-		id: string;
+		id?: string;
 		name: string[];
 		color: string;
 	}) {
-		this.id = options.id;
+		this.id = options.id || uuid.v4();
 		this.name = options.name;
 		this.color = options.color;
 	}
