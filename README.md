@@ -7,7 +7,7 @@
 [![][david-dev-badge]][david-dev-link]
 [![][mit-badge]][mit-link]
 
-Homula is an analyzer of Novel of Japanese.
+**Homula** is an analyzer of Novel of Japanese.
 
 ```
 まどか「まどまどまど」
@@ -24,7 +24,7 @@ Homula is an analyzer of Novel of Japanese.
 
 マミ「暁美さnまどか「ほむらちゃほむほむ」
 ```
-↓
+↑ Compile using the **Homula**... ↓
 ``` html
 <style>.a{color:#f79286}.b{color:#8f5ab5}.c{color:#f9b30e}.d{color:#52c7c7}.e{color:#e82f36}.f{color:#929292}</style>
 
@@ -42,6 +42,8 @@ Homula is an analyzer of Novel of Japanese.
 <br>
 <b class=c>マミ</b>「暁美さn<b class=a>まどか</b>「ほむらちゃほむほむ」
 ```
+↑ Yeah! ↓
+
 ![](./example.png)
 
 ## Features
