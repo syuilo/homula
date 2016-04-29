@@ -63,7 +63,8 @@ const allseries = [
 	}, {
 		id: 'c',
 		title: ['ご注文はうさぎですか？', 'ごちうさ']
-	}
+	},
+	...
 ];
 
 const allchars = [
@@ -87,7 +88,8 @@ const allchars = [
 		series: 'b',
 		name: ['櫻子', 'さく'],
 		color: '#e2b03a'
-	}
+	},
+	...
 ];
 
 const world = new homula.World(allseries, allchars);
