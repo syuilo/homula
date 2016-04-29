@@ -5,6 +5,8 @@
 // thread ... スレッド形式
 // ================================================================
 
+import * as uuid from 'node-uuid';
+
 import Character from './character';
 import CharsStyleMap from './chars-style-map';
 
@@ -16,18 +18,21 @@ import { INamePartToken } from './compiler/rules/name-part-of-serif';
 import anchor from './compiler/rules/anchor';
 import name from './compiler/rules/name-part-of-serif';
 
+export interface OptionsBase {
+	title: string;
+	characters: {
+		id?: string;
+		name: string[];
+		color: string;
+	}[];
+}
+
 // ----------------------------------------------------------------
 // Basic
 // ----------------------------------------------------------------
 
-export interface NovelOptions {
-	title: string;
+export interface NovelOptions extends OptionsBase {
 	text: string;
-	characters: {
-		id: string;
-		name: string[];
-		color: string;
-	}[];
 }
 
 /**
@@ -49,7 +54,11 @@ export class Novel {
 		this.text = options.text;
 		
 		this.characters = options.characters.map(c => {
-			return new Character(c);
+			return new Character({
+				id: c.id === undefined ? uuid.v4() : c.id,
+				name: c.name,
+				color: c.color
+			});
 		});
 		
 		this.charactersStyle = new CharsStyleMap(this.characters);
@@ -97,15 +106,9 @@ export class Novel {
 // Thread
 // ----------------------------------------------------------------
 
-export interface ThreadOptions {
-	title: string;
+export interface ThreadOptions extends OptionsBase {
 	posts: {
 		text: string;
-	}[];
-	characters: {
-		id: string;
-		name: string[];
-		color: string;
 	}[];
 }
 
@@ -130,7 +133,11 @@ export class Thread {
 		const posts = options.posts;
 		
 		this.characters = options.characters.map(c => {
-			return new Character(c);
+			return new Character({
+				id: c.id === undefined ? uuid.v4() : c.id,
+				name: c.name,
+				color: c.color
+			});
 		});
 		
 		this.charactersStyle = new CharsStyleMap(this.characters);

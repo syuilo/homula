@@ -36,6 +36,9 @@
     },
     "escape-html/escape-html.d.ts": {
       "ref": "8d44da84eb10cdcd2f7ea133f289caef817cb2b9"
+    },
+    "node-uuid/node-uuid.d.ts": {
+      "ref": "08ed4e9f1869e37e29514d862e0158b40e550232"
     }
   }
 }
