@@ -4,5 +4,4 @@
  * MIT Licensed
  */
 
-export { default as Novel } from './novel';
-export { default as ThreadNovel } from './thread-novel';
+export { Novel, Thread } from './novel';

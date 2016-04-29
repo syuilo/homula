@@ -25,7 +25,7 @@ npm install homula
 import * as homula from '../main';
 
 // Init a novel instance
-const novel = {
+const novel = new homula.Novel({
 	title: '櫻子「ナデナデシテー」',
 	text: '＜向日葵の家＞\n\n櫻子「向日葵～……」\n\n向日葵「何ですの？」\n\n...',
 	characters: [{
@@ -35,17 +35,10 @@ const novel = {
 		name: ['櫻子', 'さく'],
 		color: '#e2b03a'
 	}]
-};
+});
 
-// Analyze the novel
-const ctx = novel.analyze();
-
-/*
- * Now, we can access to utility methods of the analyzed novel instance
- */
-
-// e.g. Generate HTML
-const html = ctx.toHtml();
+// Compile
+const html = novel.toHtml();
 ```
 
 ### Detect series
