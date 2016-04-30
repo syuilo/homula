@@ -8,7 +8,7 @@
 		"sourceMap": false,
 		"target": "es6",
 		"module": "commonjs",
-		"removeComments": true,
+		"removeComments": false,
 		"noLib": false,
 		"outDir": "built",
 		"rootDir": "src"
