@@ -25,23 +25,23 @@
 マミ「暁美さnまどか「ほむらちゃほむほむ」
 ```
 ↑ Compile using the **Homula**... ↓
-<div class="highlight highlight-text-html-basic" style="width: 50% !important;"><pre>
-&lt;style&gt;.a{color:#f79286}.b{color:#8f5ab5}.c{color:#f9b30e}.d{color:#52c7c7}.e{color:#e82f36}.f{color:#929292}&lt;/style&gt;
+``` html
+<style>.a{color:#f79286}.b{color:#8f5ab5}.c{color:#f9b30e}.d{color:#52c7c7}.e{color:#e82f36}.f{color:#929292}</style>
 
-&lt;b&nbsp;class=a&gt;まどか&lt;/b&gt;「まどまどまど」&lt;br&gt;
-&lt;br&gt;
-&lt;b&nbsp;class=b&gt;ほむら&lt;/b&gt;「ほむほむほむ」&lt;br&gt;
-&lt;br&gt;
-&lt;b&nbsp;class=a&gt;まどか&lt;/b&gt;(ほむらちゃほむほむ)&lt;b&nbsp;class=b&gt;&nbsp;ほむら&lt;/b&gt;「まどか」&lt;br&gt;
-&lt;br&gt;
-&lt;b&nbsp;class=a&gt;まどか(神)&lt;/b&gt;「ほむ」&lt;b&nbsp;class=b&gt;&nbsp;ほむらA&lt;/b&gt;「ほ」&lt;b&nbsp;class=b&gt;&nbsp;ほむらB&lt;/b&gt;「む」&lt;br&gt;
-&lt;br&gt;
-&lt;b&nbsp;class=c&gt;マミ&lt;/b&gt;・&lt;b&nbsp;class=d&gt;さやか&lt;/b&gt;・&lt;b&nbsp;class=e&gt;あんこ&lt;/b&gt;「まみまみさやさやあんあん」&lt;br&gt;
-&lt;br&gt;
-&lt;b&nbsp;class=c&gt;マミ&lt;/b&gt;&lt;b&nbsp;class=d&gt;さや&lt;/b&gt;&lt;b&nbsp;class=e&gt;あん&lt;/b&gt;「まみまみさやさやあんあん」&lt;br&gt;
-&lt;br&gt;
-&lt;b&nbsp;class=c&gt;マミ&lt;/b&gt;「暁美さn&lt;b&nbsp;class=a&gt;まどか&lt;/b&gt;「ほむらちゃほむほむ」
-</pre></div>
+<b class=a>まどか</b>「まどまどまど」<br>
+<br>
+<b class=b>ほむら</b>「ほむほむほむ」<br>
+<br>
+<b class=a>まどか</b>(ほむらちゃほむほむ)<b class=b> ほむら</b>「まどか」<br>
+<br>
+<b class=a>まどか(神)</b>「ほむ」<b class=b> ほむらA</b>「ほ」<b class=b> ほむらB</b>「む」<br>
+<br>
+<b class=c>マミ</b>・<b class=d>さやか</b>・<b class=e>あんこ</b>「まみまみさやさやあんあん」<br>
+<br>
+<b class=c>マミ</b><b class=d>さや</b><b class=e>あん</b>「まみまみさやさやあんあん」<br>
+<br>
+<b class=c>マミ</b>「暁美さn<b class=a>まどか</b>「ほむらちゃほむほむ」
+```
 ↑ Yeah! ↓
 
 ![](./docs/assets/example.png)
