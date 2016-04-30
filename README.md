@@ -46,7 +46,7 @@
 
 ![](./docs/assets/example.png)
 
-## Features
+## Features :sparkles:
 * Series inference
 * Characters statistics
 * Compile to HTML
@@ -55,12 +55,12 @@
   * Extract trips
   * Extract master posts
 
-## Install
+## Install :package:
 ``` bash
 npm install homula
 ```
 
-## Usage
+## Usage :bulb:
 
 ### Basic
 
@@ -144,11 +144,11 @@ const series = homula.Utility.detectSeries(world, novel);
 console.log(series.id); // <- b
 ```
 
-## Forthcoming
+## Forthcoming :city_sunrise:
 Our vision.
 * Custom renderrer support
 
-## License
+## License :copyright:
 [MIT](LICENSE)
 
 [npm-link]: https://www.npmjs.com/package/homula
