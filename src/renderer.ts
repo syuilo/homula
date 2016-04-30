@@ -62,14 +62,35 @@ export default class Renderer {
 		}
 	}
 	
+	/**
+	 * テキスト トークンをレンダリングします。
+	 * @method Renderer#renderTextToken
+	 * @private
+	 * @param token テキスト トークン
+	 * @return HTML
+	 */
 	private renderTextToken(token: Token): string {
 		return escape(token.text).replace(/\n/g, '<br>');
 	}
 	
+	/**
+	 * 安価 トークンをレンダリングします。
+	 * @method Renderer#renderAnchorToken
+	 * @private
+	 * @param token 安価 トークン
+	 * @return HTML
+	 */
 	private renderAnchorToken(token: IAnchorToken): string {
 		return `<span class=anchor data-target="${token.target}">${escape(token.text)}</span>`;
 	}
 	
+	/**
+	 * セリフ内キャラクター名パート トークンをレンダリングします。
+	 * @method Renderer#renderCharacterNameToken
+	 * @private
+	 * @param token セリフ内キャラクター名パート トークン
+	 * @return HTML
+	 */
 	private renderCharacterNameToken(token: INamePartToken): string {
 		const klass = this.style.findById(token.character.id).class;
 		return `<b class=${klass}>${escape(token.text)}</b>`;

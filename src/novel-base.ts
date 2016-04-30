@@ -26,11 +26,31 @@ export type CharactersStatistics = {
  * @class NovelBase
  */
 export abstract class NovelBase {
-	id: string;
-	title: string;
-	characters: Character[];
-	charactersStyle: CharsStyleMap;
+	public id: string;
+	
+	/**
+	 * ノベル タイトル
+	 * @member NovelBase.title
+	 */
+	public title: string;
+	
+	/**
+	 * 登場人物
+	 * @member NovelBase.characters
+	 */
+	public characters: Character[];
+	
+	/**
+	 * レンダリングに使用されるキャラクタースタイル
+	 * @member NovelBase.charactersStyle
+	 */
+	public charactersStyle: CharsStyleMap;
 
+	/**
+	 * ノベルを初期化します。
+	 * @constructor
+	 * @param options ノベル情報
+	 */
 	constructor(options: OptionsBase) {
 		this.id = options.id === undefined ? null : options.id;
 
