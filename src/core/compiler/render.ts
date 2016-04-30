@@ -8,19 +8,25 @@ export default function(tokens: Token[], style: CharsStyleMap): string {
 		return null;
 	}
 
-	let html = tokens.map((token: any) => {
+	const html = tokens.map(renderToken).join('');
+
+	return html;
+
+	function renderToken(token: Token): string {
 		switch (token.type) {
+
 		case 'text':
 			return escape(token.text).replace(/\n/g, '<br>');
+
 		case 'anchor':
 			return `<span class=anchor data-target="${token.target}">${escape(token.text)}</span>`;
+
 		case 'character-name':
 			const klass = style.findById(token.character.id).class;
 			return `<b class=${klass}>${escape(token.text)}</b>`;
-		default:
-			return '';
-		}
-	}).join('');
 
-	return html;
+		default:
+			throw 'unknown token';
+		}
+	}
 }
