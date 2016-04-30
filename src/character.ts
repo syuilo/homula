@@ -7,10 +7,30 @@ import identity from './core/identity';
  * @class Character
  */
 export default class {
-	id: string;
-	name: string[];
-	color: string;
+	
+	/**
+	 * キャラクターを一意に識別できるユニークな文字列
+	 * @member Character.id
+	 */
+	public id: string;
+	
+	/**
+	 * キャラクターの名前、呼び名(作中でこのキャラを指して呼ばれる可能性のある文字列)
+	 * @member Character.name
+	 */
+	public name: string[];
+	
+	/**
+	 * レンダリングに使用されるイメージカラー
+	 * @member Character.color
+	 */
+	public color: string;
 
+	/**
+	 * キャラクターを初期化します。
+	 * @constructor
+	 * @param options キャラクタープロフィール
+	 */
 	constructor(options: {
 		id?: string;
 		name: string[];
@@ -24,6 +44,7 @@ export default class {
 	/**
 	 * 名前のアイデンティティがこのキャラクターであるか確認します
 	 * @method Character#match
+	 * @return bool
 	 */
 	public match(q: string): boolean {
 		return identity(this, q) !== null;
