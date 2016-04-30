@@ -65,7 +65,7 @@ npm install homula
 ### Basic
 
 ``` js
-import * as homula from '../main';
+import * as homula from 'homula';
 
 // Init a novel instance
 const novel = new homula.Novel({
