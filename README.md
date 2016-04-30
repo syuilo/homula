@@ -1,4 +1,4 @@
-![](./homula.png)
+![](./assets/homula.png)
 ------------------------------------------------
 
 [![][npm-badge]][npm-link]
@@ -44,7 +44,7 @@
 ```
 ↑ Yeah! ↓
 
-![](./example.png)
+![](./assets/example.png)
 
 ## Features
 * Series inference
