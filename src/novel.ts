@@ -121,7 +121,7 @@ export class Thread extends NovelBase {
 	charactersStyle: CharsStyleMap;
 
 	// type of myself
-	type: 'novel';
+	type: 'thread';
 
 	constructor(options: ThreadOptions) {
 		super(options);
