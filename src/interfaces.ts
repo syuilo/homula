@@ -1,12 +1,19 @@
-export interface Novel {
+export interface NovelBase {
 	id: string;
 	title?: string;
+}
+
+/**
+ * 基本的な形式のノベル
+ */
+export interface Novel extends NovelBase {
 	text: string;
 }
 
-export interface Thread {
-	id: string;
-	title?: string;
+/**
+ * スレッド形式のノベル
+ */
+export interface Thread extends NovelBase {
 	posts: ThreadPost[];
 }
 
