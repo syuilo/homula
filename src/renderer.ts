@@ -51,7 +51,7 @@ export default class Renderer {
 			return this.renderCharacterNameToken(<INamePartToken>token);
 
 		default:
-			throw 'unknown token';
+			throw `Unknown token "${token.type}"`;
 		}
 	}
 }
