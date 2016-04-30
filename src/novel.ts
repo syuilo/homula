@@ -10,13 +10,13 @@ import { NovelBase, OptionsBase, CharactersStatistics } from './novel-base';
 import Character from './character';
 import CharsStyleMap from './chars-style-map';
 
-import Token from './compiler/token';
-import tokenize from './compiler/tokenizer';
-import render from './compiler/render';
-import { INamePartToken } from './compiler/rules/name-part-of-serif';
+import Token from './core/compiler/token';
+import tokenize from './core/compiler/tokenizer';
+import render from './core/compiler/render';
+import { INamePartToken } from './core/compiler/rules/name-part-of-serif';
 
-import anchor from './compiler/rules/anchor';
-import name from './compiler/rules/name-part-of-serif';
+import anchor from './core/compiler/rules/anchor';
+import name from './core/compiler/rules/name-part-of-serif';
 
 // ----------------------------------------------------------------
 // Basic

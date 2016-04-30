@@ -6,20 +6,22 @@
 
 import { Novel, Thread } from './novel';
 import * as interfaces from './interfaces';
-import World from './world';
-import Series from './utility/series';
-import detectSeries from './utility/detect-series';
-import modifyTrip from './utility/thread/modify-trip';
-import weakMarkMaster from './utility/thread/weak-mark-master';
-import strongMarkMaster from './utility/thread/strong-mark-master';
+
+	import World from './utility/world';
+	import Series from './utility/series';
+	import detectSeries from './utility/detect-series';
+
+		import modifyTrip from './utility/thread/modify-trip';
+		import weakMarkMaster from './utility/thread/weak-mark-master';
+		import strongMarkMaster from './utility/thread/strong-mark-master';
 
 export = {
 	Novel: Novel,
 	Thread: Thread,
-	World: World,
-	Series: Series,
 	interfaces: interfaces,
 	Utility: {
+		World: World,
+		Series: Series,
 		detectSeries: detectSeries,
 		modifyTrip: modifyTrip,
 		weakMarkMaster: weakMarkMaster,

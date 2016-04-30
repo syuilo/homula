@@ -1,5 +1,5 @@
-import Series from './utility/series';
-import Character from './core/series-character';
+import Series from './series';
+import Character from '../core/series-character';
 
 /**
  * シリーズとキャラクター情報のデータベース

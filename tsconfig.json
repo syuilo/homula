@@ -27,14 +27,14 @@
 		"./typings/bundle.d.ts",
 		"./src/character.ts",
 		"./src/chars-style-map.ts",
-		"./src/compiler/inovel.ts",
-		"./src/compiler/render.ts",
-		"./src/compiler/rules/anchor.ts",
-		"./src/compiler/rules/name-part-of-serif.ts",
-		"./src/compiler/token.ts",
-		"./src/compiler/tokenizer.ts",
 		"./src/core/character-identity.ts",
 		"./src/core/check-cross.ts",
+		"./src/core/compiler/inovel.ts",
+		"./src/core/compiler/render.ts",
+		"./src/core/compiler/rules/anchor.ts",
+		"./src/core/compiler/rules/name-part-of-serif.ts",
+		"./src/core/compiler/token.ts",
+		"./src/core/compiler/tokenizer.ts",
 		"./src/core/extract-character-names-in-text.ts",
 		"./src/core/extract-name-part-in-serif.ts",
 		"./src/core/identity.ts",
@@ -57,6 +57,6 @@
 		"./src/utility/thread/paint-id.ts",
 		"./src/utility/thread/strong-mark-master.ts",
 		"./src/utility/thread/weak-mark-master.ts",
-		"./src/world.ts"
+		"./src/utility/world.ts"
 	]
 }

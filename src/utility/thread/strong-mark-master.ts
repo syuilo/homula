@@ -1,8 +1,8 @@
 import Character from '../../character';
-import Series from '../../core/series';
+import Series from '../series';
 import { Thread, ThreadPostUser } from '../../interfaces';
 
-import World from '../../world';
+import World from '../world';
 import extractNamePartInSerif from '../../core/extract-name-part-in-serif';
 
 /**

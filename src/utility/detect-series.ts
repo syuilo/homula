@@ -3,7 +3,7 @@ import extractCharacterNamesInText from '../core/extract-character-names-in-text
 import unModifyTitle from '../core/un-modify-title';
 
 import { Novel, Thread, isThread } from '../interfaces';
-import World from '../world';
+import World from './world';
 
 /**
  * SSのシリーズを同定します

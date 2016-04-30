@@ -1,7 +1,7 @@
 import * as escape from 'escape-html';
 
 import Token from './token';
-import CharsStyleMap from '../chars-style-map';
+import CharsStyleMap from '../../chars-style-map';
 
 export default function(tokens: Token[], style: CharsStyleMap): string {
 	if (tokens.length === 0) {

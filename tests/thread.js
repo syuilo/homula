@@ -16,7 +16,7 @@ const homula = require('../built/main');
 
 const allseries = require('./examples/series.json');
 const allchars = require('./examples/characters.json');
-const world = new homula.World(allseries, allchars);
+const world = new homula.Utility.World(allseries, allchars);
 
 describe('thread', () => {
 
