@@ -4,6 +4,7 @@
 
 import Character from './character';
 import CharsStyleMap from './chars-style-map';
+import Renderer from './renderer';
 
 export interface OptionsBase {
 	id?: string;
@@ -35,6 +36,12 @@ export abstract class NovelBase {
 
 		this.title = options.title || null;
 	}
+	
+	abstract toHtml(renderer?: Renderer): any;
+	
+	abstract getCSS(): string;
+	
+	abstract getCharactersStatistics(): CharactersStatistics;
 
 	/**
 	 * キャラクターの統計を計算します

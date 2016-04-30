@@ -6,6 +6,7 @@
 
 import { Novel, Thread } from './novel';
 import * as interfaces from './interfaces';
+import Renderer from './renderer';
 
 	import World from './utility/world';
 	import Series from './utility/series';
@@ -19,6 +20,7 @@ export = {
 	Novel: Novel,
 	Thread: Thread,
 	interfaces: interfaces,
+	Renderer: Renderer,
 	Utility: {
 		World: World,
 		Series: Series,

@@ -12,7 +12,7 @@ import CharsStyleMap from './chars-style-map';
 
 import Token from './core/compiler/token';
 import tokenize from './core/compiler/tokenizer';
-import render from './core/compiler/render';
+import Renderer from './renderer';
 import { INamePartToken } from './core/compiler/rules/name-part-of-serif';
 
 import anchor from './core/compiler/rules/anchor';
@@ -52,8 +52,9 @@ export class Novel extends NovelBase {
 	 * このノベル本文のHTMLを生成します
 	 * @method Novel#toHtml
 	 */
-	public toHtml(): string {
-		return render(this.tokens, this.charactersStyle);
+	public toHtml(renderer?: Renderer): string {
+		renderer = renderer || new Renderer(this.charactersStyle);
+		return renderer.render(this.tokens);
 	}
 
 	/**
@@ -133,8 +134,9 @@ export class Thread extends NovelBase {
 	 * このノベル本文のHTMLを生成します
 	 * @method Thread#toHtml
 	 */
-	public toHtml(): string[] {
-		return this.posts.map(p => render(p.tokens, this.charactersStyle));
+	public toHtml(renderer?: Renderer): string[] {
+		renderer = renderer || new Renderer(this.charactersStyle);
+		return this.posts.map(p => renderer.render(p.tokens));
 	}
 
 	/**
