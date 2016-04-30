@@ -111,14 +111,10 @@ export interface ThreadOptions extends OptionsBase {
  * @class Thread
  */
 export class Thread extends NovelBase {
-	id: string;
-	title: string;
 	posts: {
 		text: string;
 		tokens: Token[];
 	}[];
-	characters: Character[];
-	charactersStyle: CharsStyleMap;
 
 	// type of myself
 	type: 'thread';
