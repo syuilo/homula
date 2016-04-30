@@ -19,16 +19,32 @@ import anchor from './core/compiler/rules/anchor';
 import name from './core/compiler/rules/name-part-of-serif';
 
 /**
- * ノベルクラス
+ * 本文のみのノベル
  * @class Novel
  */
 export class Novel extends NovelBase {
-	text: string;
-	tokens: Token[];
+	
+	/**
+	 * 本文
+	 * @member Novel.text
+	 */
+	public text: string;
+
+	/**
+	 * 本文のトークン
+	 * @member Novel.token
+	 * @private
+	 */
+	private tokens: Token[];
 	
 	// type of myself
 	type: 'novel';
 
+	/**
+	 * ノベルを初期化します。
+	 * @constructor
+	 * @param options ノベル情報
+	 */
 	constructor(options: OptionsBase & {
 		text: string;
 	}) {
@@ -51,6 +67,8 @@ export class Novel extends NovelBase {
 	/**
 	 * このノベル本文のHTMLを生成します
 	 * @method Novel#toHtml
+	 * @param renderer? レンダラー
+	 * @return HTML
 	 */
 	public toHtml(renderer?: Renderer): string {
 		renderer = renderer || new Renderer(this.charactersStyle);
@@ -60,6 +78,7 @@ export class Novel extends NovelBase {
 	/**
 	 * このノベル本文のCSSを取得します
 	 * @method Novel#getCSS
+	 * @return CSS
 	 */
 	public getCSS(): string {
 		return this.charactersStyle.toCSS(this);
@@ -68,6 +87,7 @@ export class Novel extends NovelBase {
 	/**
 	 * キャラクターの統計を取得します
 	 * @method Novel#getCharactersStatistics
+	 * @return 統計情報
 	 */
 	public getCharactersStatistics(): CharactersStatistics {
 		const foundCharacters: Character[] = [];
@@ -92,11 +112,16 @@ export class Novel extends NovelBase {
 }
 
 /**
- * ノベルクラス
+ * スレッド形式のノベル
  * @class Thread
  */
 export class Thread extends NovelBase {
-	posts: {
+	
+	/**
+	 * 投稿
+	 * @member Thread.posts
+	 */
+	public posts: {
 		text: string;
 		tokens: Token[];
 	}[];
@@ -104,6 +129,11 @@ export class Thread extends NovelBase {
 	// type of myself
 	type: 'thread';
 
+	/**
+	 * ノベルを初期化します。
+	 * @constructor
+	 * @param options ノベル情報
+	 */
 	constructor(options: OptionsBase & {
 		posts: {
 			text: string;
@@ -133,6 +163,8 @@ export class Thread extends NovelBase {
 	/**
 	 * このノベル本文のHTMLを生成します
 	 * @method Thread#toHtml
+	 * @param renderer? レンダラー
+	 * @return それぞれの投稿のHTML
 	 */
 	public toHtml(renderer?: Renderer): string[] {
 		renderer = renderer || new Renderer(this.charactersStyle);
@@ -142,6 +174,7 @@ export class Thread extends NovelBase {
 	/**
 	 * このノベル本文のCSSを取得します
 	 * @method Thread#getCSS
+	 * @return CSS
 	 */
 	public getCSS(): string {
 		return this.charactersStyle.toCSS(this);
@@ -150,6 +183,7 @@ export class Thread extends NovelBase {
 	/**
 	 * キャラクターの統計を取得します
 	 * @method Thread#getCharactersStatistics
+	 * @return 統計情報
 	 */
 	public getCharactersStatistics(): CharactersStatistics {
 		const foundCharacters: Character[] = [];

@@ -12,33 +12,39 @@ import { INamePartToken } from './core/compiler/rules/name-part-of-serif';
  * @class Renderer
  */
 export default class Renderer {
+	
+	/**
+	 * レンダリングに使用されるキャラクタースタイル
+	 * @member Renderer.style
+	 */
 	public style: CharsStyleMap;
 	
+	/**
+	 * レンダラーを初期化します。
+	 * @constructor
+	 * @param style レンダリングに使用するキャラクタースタイル
+	 */
 	constructor(style: CharsStyleMap) {
 		this.style = style;
 	}
 	
-	private renderTextToken(token: Token): string {
-		return escape(token.text).replace(/\n/g, '<br>');
-	}
-	
-	private renderAnchorToken(token: IAnchorToken): string {
-		return `<span class=anchor data-target="${token.target}">${escape(token.text)}</span>`;
-	}
-	
-	private renderCharacterNameToken(token: INamePartToken): string {
-		const klass = this.style.findById(token.character.id).class;
-		return `<b class=${klass}>${escape(token.text)}</b>`;
-	}
-
 	/**
 	 * 与えられたトークンに基づいてHTMLを生成します。
 	 * @method Renderer#render
+	 * @param tokens 一連のトークンの配列
+	 * @return HTML
 	 */
 	public render(tokens: Token[]): string {
 		return tokens.map(this.renderToken.bind(this)).join('');
 	}
 	
+	/**
+	 * トークンレンダラー振り分け
+	 * @method Renderer#renderToken
+	 * @private
+	 * @param token トークン
+	 * @return HTML
+	 */
 	private renderToken(token: Token): string {
 		switch (token.type) {
 
@@ -54,5 +60,18 @@ export default class Renderer {
 		default:
 			throw `Unknown token "${token.type}"`;
 		}
+	}
+	
+	private renderTextToken(token: Token): string {
+		return escape(token.text).replace(/\n/g, '<br>');
+	}
+	
+	private renderAnchorToken(token: IAnchorToken): string {
+		return `<span class=anchor data-target="${token.target}">${escape(token.text)}</span>`;
+	}
+	
+	private renderCharacterNameToken(token: INamePartToken): string {
+		const klass = this.style.findById(token.character.id).class;
+		return `<b class=${klass}>${escape(token.text)}</b>`;
 	}
 }

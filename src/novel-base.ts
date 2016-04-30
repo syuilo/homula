@@ -45,6 +45,10 @@ export abstract class NovelBase {
 
 	/**
 	 * キャラクターの統計を計算します
+	 * @method NobelBase#calcCharactersStatistics
+	 * @protected
+	 * @param characters 対象の全てのキャラクター
+	 * @return 統計情報
 	 */
 	protected calcCharactersStatistics(characters: Character[]): CharactersStatistics {
 		// すべてのキャラの登場回数
@@ -69,6 +73,7 @@ export abstract class NovelBase {
 				onStageRatio: onStageRatio
 			};
 		})
+
 		// 登場頻度で降順ソート
 		.sort((a, b) => {
 			if (a.onStageRatio > b.onStageRatio) {
