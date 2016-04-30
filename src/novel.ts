@@ -18,14 +18,6 @@ import { INamePartToken } from './core/compiler/rules/name-part-of-serif';
 import anchor from './core/compiler/rules/anchor';
 import name from './core/compiler/rules/name-part-of-serif';
 
-// ----------------------------------------------------------------
-// Basic
-// ----------------------------------------------------------------
-
-export interface NovelOptions extends OptionsBase {
-	text: string;
-}
-
 /**
  * ノベルクラス
  * @class Novel
@@ -37,7 +29,9 @@ export class Novel extends NovelBase {
 	// type of myself
 	type: 'novel';
 
-	constructor(options: NovelOptions) {
+	constructor(options: OptionsBase & {
+		text: string;
+	}) {
 		super(options);
 
 		this.text = options.text;
@@ -96,16 +90,6 @@ export class Novel extends NovelBase {
 	}
 }
 
-// ----------------------------------------------------------------
-// Thread
-// ----------------------------------------------------------------
-
-export interface ThreadOptions extends OptionsBase {
-	posts: {
-		text: string;
-	}[];
-}
-
 /**
  * ノベルクラス
  * @class Thread
@@ -119,7 +103,11 @@ export class Thread extends NovelBase {
 	// type of myself
 	type: 'thread';
 
-	constructor(options: ThreadOptions) {
+	constructor(options: OptionsBase & {
+		posts: {
+			text: string;
+		}[];
+	}) {
 		super(options);
 
 		const posts = options.posts;
