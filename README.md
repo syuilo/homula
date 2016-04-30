@@ -129,7 +129,7 @@ const allchars = [
 	...
 ];
 
-const world = new homula.World(allseries, allchars);
+const world = new homula.Utility.World(allseries, allchars);
 ```
 
 **Now, we can detect series of a novel:**
