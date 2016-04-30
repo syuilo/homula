@@ -33,6 +33,7 @@ export default class Renderer {
 
 	/**
 	 * 与えられたトークンに基づいてHTMLを生成します。
+	 * @method Renderer#render
 	 */
 	public render(tokens: Token[]): string {
 		return tokens.map(this.renderToken.bind(this)).join('');
