@@ -144,6 +144,10 @@ const series = homula.Utility.detectSeries(world, novel);
 console.log(series.id); // <- b
 ```
 
+## Forthcoming
+Our vision.
+* Custom renderrer support
+
 ## License
 [MIT](LICENSE)
 
