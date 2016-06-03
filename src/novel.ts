@@ -24,6 +24,9 @@ import name from './core/compiler/rules/name-part-of-serif';
  */
 export class Novel extends NovelBase {
 
+	// type of myself
+	type: 'novel';
+
 	/**
 	 * 本文
 	 * @member Novel.text
@@ -36,9 +39,6 @@ export class Novel extends NovelBase {
 	 * @private
 	 */
 	private tokens: Token[];
-
-	// type of myself
-	type: 'novel';
 
 	/**
 	 * ノベルを初期化します。
@@ -117,6 +117,9 @@ export class Novel extends NovelBase {
  */
 export class Thread extends NovelBase {
 
+	// type of myself
+	type: 'thread';
+
 	/**
 	 * 投稿
 	 * @member Thread.posts
@@ -125,9 +128,6 @@ export class Thread extends NovelBase {
 		text: string;
 		tokens: Token[];
 	}[];
-
-	// type of myself
-	type: 'thread';
 
 	/**
 	 * ノベルを初期化します。
