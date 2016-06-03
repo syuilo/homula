@@ -24,4 +24,4 @@ export default (text: string | string[]): string[] => {
 	});
 
 	return characters;
-}
+};

@@ -24,4 +24,4 @@ export default(novel: Novel | Thread): boolean => {
 
 		return false;
 	}
-}
+};

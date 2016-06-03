@@ -129,7 +129,7 @@ export default
 	});
 
 	return marked;
-}
+};
 
 function getAnchorTargets(text: string): number[] {
 	const anchors: string[] = [];

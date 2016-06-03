@@ -41,4 +41,4 @@ export default (serif: string): string => {
 	}
 
 	return null;
-}
+};

@@ -99,7 +99,7 @@ export default (character: Character, name: string): CharacterIdentity => {
 			return new CharacterIdentity(character, name);
 		}
 	}
-}
+};
 
 function normalize(str: string): string {
 	return zenkakuToHankaku(katakanaToHiragana(hankakukatakanaToZenkakukatakana(removeWhiteSpaces(str))));

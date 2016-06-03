@@ -5,4 +5,4 @@
  */
 export default (title: string): string => {
 	return title.replace(/【.+?】/, '');
-}
+};
