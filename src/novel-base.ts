@@ -27,19 +27,19 @@ export type CharactersStatistics = {
  */
 export abstract class NovelBase {
 	public id: string;
-	
+
 	/**
 	 * ノベル タイトル
 	 * @member NovelBase.title
 	 */
 	public title: string;
-	
+
 	/**
 	 * 登場人物
 	 * @member NovelBase.characters
 	 */
 	public characters: Character[];
-	
+
 	/**
 	 * レンダリングに使用されるキャラクタースタイル
 	 * @member NovelBase.charactersStyle
@@ -56,11 +56,11 @@ export abstract class NovelBase {
 
 		this.title = options.title || null;
 	}
-	
+
 	abstract toHtml(renderer?: Renderer): any;
-	
+
 	abstract getCSS(): string;
-	
+
 	abstract getCharactersStatistics(): CharactersStatistics;
 
 	/**

@@ -12,13 +12,13 @@ import { INamePartToken } from './core/compiler/rules/name-part-of-serif';
  * @class Renderer
  */
 export default class Renderer {
-	
+
 	/**
 	 * レンダリングに使用されるキャラクタースタイル
 	 * @member Renderer.style
 	 */
 	public style: CharsStyleMap;
-	
+
 	/**
 	 * レンダラーを初期化します。
 	 * @constructor
@@ -27,7 +27,7 @@ export default class Renderer {
 	constructor(style: CharsStyleMap) {
 		this.style = style;
 	}
-	
+
 	/**
 	 * 与えられたトークンに基づいてHTMLを生成します。
 	 * @method Renderer#render
@@ -37,7 +37,7 @@ export default class Renderer {
 	public render(tokens: Token[]): string {
 		return tokens.map(this.renderToken.bind(this)).join('');
 	}
-	
+
 	/**
 	 * トークンレンダラー振り分け
 	 * @method Renderer#renderToken
@@ -61,7 +61,7 @@ export default class Renderer {
 			throw `Unknown token "${token.type}"`;
 		}
 	}
-	
+
 	/**
 	 * テキスト トークンをレンダリングします。
 	 * @method Renderer#renderTextToken
@@ -72,7 +72,7 @@ export default class Renderer {
 	private renderTextToken(token: Token): string {
 		return escape(token.text).replace(/\n/g, '<br>');
 	}
-	
+
 	/**
 	 * 安価 トークンをレンダリングします。
 	 * @method Renderer#renderAnchorToken
@@ -83,7 +83,7 @@ export default class Renderer {
 	private renderAnchorToken(token: IAnchorToken): string {
 		return `<span class=anchor data-target="${token.target}">${escape(token.text)}</span>`;
 	}
-	
+
 	/**
 	 * セリフ内キャラクター名パート トークンをレンダリングします。
 	 * @method Renderer#renderCharacterNameToken

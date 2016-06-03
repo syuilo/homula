@@ -7,19 +7,19 @@ import identity from './core/identity';
  * @class Character
  */
 export default class {
-	
+
 	/**
 	 * キャラクターを一意に識別できるユニークな文字列
 	 * @member Character.id
 	 */
 	public id: string;
-	
+
 	/**
 	 * キャラクターの名前、呼び名(作中でこのキャラを指して呼ばれる可能性のある文字列)
 	 * @member Character.name
 	 */
 	public name: string[];
-	
+
 	/**
 	 * レンダリングに使用されるイメージカラー
 	 * @member Character.color

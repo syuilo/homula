@@ -23,7 +23,7 @@ import name from './core/compiler/rules/name-part-of-serif';
  * @class Novel
  */
 export class Novel extends NovelBase {
-	
+
 	/**
 	 * 本文
 	 * @member Novel.text
@@ -36,7 +36,7 @@ export class Novel extends NovelBase {
 	 * @private
 	 */
 	private tokens: Token[];
-	
+
 	// type of myself
 	type: 'novel';
 
@@ -116,7 +116,7 @@ export class Novel extends NovelBase {
  * @class Thread
  */
 export class Thread extends NovelBase {
-	
+
 	/**
 	 * 投稿
 	 * @member Thread.posts
