@@ -7,6 +7,8 @@
 [![][david-dev-badge]][david-dev-link]
 [![][mit-badge]][mit-link]
 
+[![NPM](https://nodei.co/npm/homula.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/homula/)
+
 **Homula** is an analyzer of Novel of Japanese.
 
 ```
