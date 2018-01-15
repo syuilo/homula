@@ -20,7 +20,6 @@ import name from './core/compiler/rules/name-part-of-serif';
 
 /**
  * 本文のみのノベル
- * @class Novel
  */
 export class Novel extends NovelBase {
 
@@ -29,20 +28,23 @@ export class Novel extends NovelBase {
 
 	/**
 	 * 本文
-	 * @member Novel.text
 	 */
 	public text: string;
 
 	/**
 	 * 本文のトークン
-	 * @member Novel.token
-	 * @private
 	 */
 	private tokens: Token[];
 
 	/**
+	 * このノベルを読了するのに要すると予想される時間(minutes)
+	 */
+	public get time() {
+		return this.getTime(this.text);
+	}
+
+	/**
 	 * ノベルを初期化します。
-	 * @constructor
 	 * @param options ノベル情報
 	 */
 	constructor(options: OptionsBase & {
@@ -66,7 +68,6 @@ export class Novel extends NovelBase {
 
 	/**
 	 * このノベル本文のHTMLを生成します
-	 * @method Novel#toHtml
 	 * @param renderer? レンダラー
 	 * @return HTML
 	 */
@@ -77,7 +78,6 @@ export class Novel extends NovelBase {
 
 	/**
 	 * このノベル本文のCSSを取得します
-	 * @method Novel#getCSS
 	 * @return CSS
 	 */
 	public getCSS(): string {
@@ -86,7 +86,6 @@ export class Novel extends NovelBase {
 
 	/**
 	 * キャラクターの統計を取得します
-	 * @method Novel#getCharactersStatistics
 	 * @return 統計情報
 	 */
 	public getCharactersStatistics(): CharactersStatistics {
@@ -113,7 +112,6 @@ export class Novel extends NovelBase {
 
 /**
  * スレッド形式のノベル
- * @class Thread
  */
 export class Thread extends NovelBase {
 
@@ -122,21 +120,21 @@ export class Thread extends NovelBase {
 
 	/**
 	 * 投稿
-	 * @member Thread.posts
 	 */
 	public posts: {
 		text: string;
 		tokens: Token[];
+		isMaster: boolean;
 	}[];
 
 	/**
 	 * ノベルを初期化します。
-	 * @constructor
 	 * @param options ノベル情報
 	 */
 	constructor(options: OptionsBase & {
 		posts: {
 			text: string;
+			isMaster: boolean;
 		}[];
 	}) {
 		super(options);
@@ -149,20 +147,18 @@ export class Thread extends NovelBase {
 
 		this.charactersStyle = new CharsStyleMap(this.characters);
 
-		this.posts = posts.map(p => {
-			return {
-				text: p.text,
-				tokens: tokenize({
-					id: this.id,
-					characters: this.characters
-				}, p.text, [anchor, name])
-			};
-		});
+		this.posts = posts.map(p => ({
+			text: p.text,
+			isMaster: p.isMaster,
+			tokens: tokenize({
+				id: this.id,
+				characters: this.characters
+			}, p.text, [anchor, name])
+		}));
 	}
 
 	/**
 	 * このノベル本文のHTMLを生成します
-	 * @method Thread#toHtml
 	 * @param renderer? レンダラー
 	 * @return それぞれの投稿のHTML
 	 */
@@ -173,7 +169,6 @@ export class Thread extends NovelBase {
 
 	/**
 	 * このノベル本文のCSSを取得します
-	 * @method Thread#getCSS
 	 * @return CSS
 	 */
 	public getCSS(): string {
@@ -182,7 +177,6 @@ export class Thread extends NovelBase {
 
 	/**
 	 * キャラクターの統計を取得します
-	 * @method Thread#getCharactersStatistics
 	 * @return 統計情報
 	 */
 	public getCharactersStatistics(): CharactersStatistics {
@@ -206,5 +200,15 @@ export class Thread extends NovelBase {
 		}
 
 		return this.calcCharactersStatistics(foundCharacters);
+	}
+
+	/**
+	 * このノベルを読了するのに要すると予想される時間(minutes)
+	 */
+	public get time() {
+		return this.getTime(this.posts
+			.filter(p => p.isMaster)
+			.map(p => p.text)
+			.join('\n\n'));
 	}
 }

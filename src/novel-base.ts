@@ -30,25 +30,21 @@ export abstract class NovelBase {
 
 	/**
 	 * ノベル タイトル
-	 * @member NovelBase.title
 	 */
 	public title: string;
 
 	/**
 	 * 登場人物
-	 * @member NovelBase.characters
 	 */
 	public characters: Character[];
 
 	/**
 	 * レンダリングに使用されるキャラクタースタイル
-	 * @member NovelBase.charactersStyle
 	 */
 	public charactersStyle: CharsStyleMap;
 
 	/**
 	 * ノベルを初期化します。
-	 * @constructor
 	 * @param options ノベル情報
 	 */
 	constructor(options: OptionsBase) {
@@ -65,8 +61,6 @@ export abstract class NovelBase {
 
 	/**
 	 * キャラクターの統計を計算します
-	 * @method NobelBase#calcCharactersStatistics
-	 * @protected
 	 * @param characters 対象の全てのキャラクター
 	 * @return 統計情報
 	 */
@@ -106,5 +100,12 @@ export abstract class NovelBase {
 		});
 
 		return returns;
+	}
+
+	/**
+	 * ノベルを読了するのに要すると予想される時間を取得します(minutes)
+	 */
+	protected getTime(text: string) {
+		return Math.floor(text.length / 18) / 60;
 	}
 }
