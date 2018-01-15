@@ -1,9 +1,9 @@
 {
   "name": "homula",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "A novel analyzer",
-  "main": "./built/main.js",
-  "types": "./built/main.d.ts",
+  "main": "./built/index.js",
+  "types": "./built/index.d.ts",
   "repository": "https://github.com/syuilo/homula.git",
   "bugs": "https://github.com/syuilo/homula/issues",
   "scripts": {
@@ -19,13 +19,13 @@
     "typescript": "2.6.2"
   },
   "dependencies": {
-    "assign-deep": "0.4.5",
+    "assign-deep": "0.4.6",
     "basen": "0.0.1",
-    "debug": "2.2.0",
+    "debug": "3.1.0",
     "escape-html": "1.0.3",
-    "html-entities": "1.2.0",
-    "moment": "2.13.0",
-    "seedrandom": "2.4.2",
-    "uuid": "3.0.0"
+    "html-entities": "1.2.1",
+    "moment": "2.20.1",
+    "seedrandom": "2.4.3",
+    "uuid": "3.1.0"
   }
 }

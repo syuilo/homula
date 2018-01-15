@@ -1,5 +1,5 @@
-![](./docs/assets/homula.png)
-------------------------------------------------
+![homula](./docs/assets/homula.png)
+===================================
 
 [![][npm-badge]][npm-link]
 [![][travis-badge]][travis-link]
@@ -48,7 +48,8 @@
 
 ![](./docs/assets/example.png)
 
-## Features :sparkles:
+Features :sparkles:
+-------------------
 * Origin inference
 * Characters statistics
 * Compile to HTML
@@ -57,12 +58,14 @@
   * Extract trips
   * Extract master posts
 
-## Install :package:
+Install :package:
+-----------------
 ``` bash
 npm install homula
 ```
 
-## Usage :bulb:
+Usage :bulb:
+------------
 
 ### Basic
 
@@ -136,17 +139,16 @@ const world = new homula.Utility.World(allorigin, allchars);
 
 **Now, we can detect origin of a novel:**
 ``` js
-const novel = {
-	title: '櫻子「ナデナデシテー」',
-	text: '＜向日葵の家＞\n\n櫻子「向日葵～……」\n\n向日葵「何ですの？」\n\n...'
-};
+const title = '櫻子「ナデナデシテー」';
+const text = '＜向日葵の家＞\n\n櫻子「向日葵～……」\n\n向日葵「何ですの？」\n\n...';
 
-const origin = homula.Utility.detectOrigin(world, novel);
+const origin = homula.Utility.detectOrigin(world, title, text);
 
 console.log(origin.id); // <- b
 ```
 
-## License :copyright:
+License :copyright:
+-------------------
 [MIT](LICENSE)
 
 [npm-link]: https://www.npmjs.com/package/homula
