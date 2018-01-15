@@ -10,7 +10,7 @@ import extractAnchors from './extract-anchors';
  * @return マーク情報が付加された投稿の配列
  */
 export default
-	<T extends {
+	<P extends {
 		isMaster: boolean;
 		text: string;
 		tokens: Token[];
@@ -20,8 +20,8 @@ export default
 			id: string;
 		}
 	}>
-	(title: string, posts: T[]):
-	((T & {
+	(title: string, posts: P[]):
+	((P & {
 		isAnchor: boolean;
 	})[]) => {
 
@@ -59,7 +59,7 @@ export default
 		}
 	});
 
-	const marked = <(T & {
+	const marked = <(P & {
 		isAnchor: boolean;
 	})[]>posts.map(post => {
 		let isAnchor = false;

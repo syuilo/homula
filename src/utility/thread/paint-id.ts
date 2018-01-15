@@ -9,13 +9,13 @@ import { Thread } from '../../interfaces';
  * @return IDの背景色と文字色情報が付加された投稿
  */
 export default
-	<T extends {
+	<P extends {
 		user: {
 			id: string;
 		};
 	}>
-	(post: T):
-	T & {
+	(post: P):
+	P & {
 		user: {
 			backgroundColor: string;
 			foregroundColor: string;

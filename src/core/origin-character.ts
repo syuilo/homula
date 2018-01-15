@@ -5,7 +5,10 @@ import Character from '../character';
  * @class OriginCharacter
  */
 export default class extends Character {
-	origin: string[];
+	/**
+	 * キャラクターの所属するオリジン(作品)
+	 */
+	private origin: string[];
 
 	constructor(options: {
 		id?: string;
