@@ -11,31 +11,29 @@ const tripSymbol: string = '◆';
  * @return トリップ情報が付加された投稿
  */
 export default function
-	<T extends Thread>
-	(novel: T):
-	T & {
-		posts: {
-			user: {
-				trip: string;
-			};
+	<P extends {
+		user: {
+			name: string;
+		};
+	}>
+	(post: P):
+	P & {
+		user: {
+			trip: string;
 		};
 	} {
 
-	novel.posts = novel.posts.map(post => {
-		let trip: string;
+	let trip: string;
 
-		if (post.user.name.indexOf(tripSymbol) !== -1) {
-			trip = post.user.name.split(tripSymbol)[1];
-		} else {
-			trip = null;
+	if (post.user.name.indexOf(tripSymbol) !== -1) {
+		trip = post.user.name.split(tripSymbol)[1];
+	} else {
+		trip = null;
+	}
+
+	return assign(post, {
+		user: {
+			trip: trip
 		}
-
-		return assign(post, {
-			user: {
-				trip: trip
-			}
-		});
 	});
-
-	return novel;
 }

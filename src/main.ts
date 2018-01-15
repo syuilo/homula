@@ -9,8 +9,8 @@ import * as interfaces from './interfaces';
 import Renderer from './renderer';
 
 	import World from './utility/world';
-	import Series from './utility/series';
-	import detectSeries from './utility/detect-series';
+	import Origin from './utility/origin';
+	import detectOrigin from './utility/detect-origin';
 
 		import modifyTrip from './utility/thread/modify-trip';
 		import weakMarkMaster from './utility/thread/weak-mark-master';
@@ -23,8 +23,8 @@ export = {
 	Renderer: Renderer,
 	Utility: {
 		World: World,
-		Series: Series,
-		detectSeries: detectSeries,
+		Origin: Origin,
+		detectOrigin: detectOrigin,
 		modifyTrip: modifyTrip,
 		weakMarkMaster: weakMarkMaster,
 		strongMarkMaster: strongMarkMaster

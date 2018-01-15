@@ -1,27 +1,26 @@
-import Series from './series';
-import Character from '../core/series-character';
+import Origin from './origin';
+import Character from '../core/origin-character';
 
 /**
- * シリーズとキャラクター情報のデータベース
- * @class World
+ * オリジンとキャラクター情報のデータベース
  */
 export default class {
 
-	public series: Series[];
+	public origin: Origin[];
 
 	public characters: Character[];
 
-	constructor(series: {
+	constructor(origin: {
 		id: string;
 		title: string | string[];
 	}[], characters: {
 		id: string;
 		name: string[];
 		color: string;
-		series: string | string[];
+		origin: string | string[];
 	}[]) {
-		this.series = series.map(s => {
-			return new Series(s);
+		this.origin = origin.map(s => {
+			return new Origin(s);
 		});
 
 		this.characters = characters.map(c => {
@@ -30,16 +29,16 @@ export default class {
 	}
 
 	/**
-	 * 与えられたシリーズに登場するキャラクターを取得します。
-	 * @param series シリーズ
-	 * @method World#getAllSeriesCharacters
+	 * 与えられたオリジンに登場するキャラクターを取得します。
+	 * @param origin オリジン
+	 * @method World#getAllOriginCharacters
 	 */
-	public getAllSeriesCharacters(series: Series[]): Character[] {
+	public getAllOriginCharacters(origin: Origin[]): Character[] {
 		return this.characters.filter(c => {
 			let found = false;
 
-			series.forEach(series => {
-				if (c.series.indexOf(series.id) !== -1) {
+			origin.forEach(origin => {
+				if (c.origin.indexOf(origin.id) !== -1) {
 					found = true;
 				}
 			});

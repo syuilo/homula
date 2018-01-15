@@ -2,19 +2,19 @@ import Character from '../character';
 
 /**
  * キャラクター
- * @class SeriesCharacter
+ * @class OriginCharacter
  */
 export default class extends Character {
-	series: string[];
+	origin: string[];
 
 	constructor(options: {
 		id?: string;
 		name: string[];
 		color: string;
-		series: string | string[];
+		origin: string | string[];
 	}) {
 		super(options);
 
-		this.series = typeof options.series === 'string' ? [options.series] : options.series;
+		this.origin = typeof options.origin === 'string' ? [options.origin] : options.origin;
 	}
 }

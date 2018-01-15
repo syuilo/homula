@@ -1,12 +1,13 @@
 {
 	"compilerOptions": {
-		"noEmitOnError": false,
-		"noImplicitAny": true,
+		"noEmitOnError": true,
+		"noImplicitAny": false,
 		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,
+		"experimentalDecorators": true,
 		"declaration": true,
 		"sourceMap": false,
-		"target": "es6",
+		"target": "es2017",
 		"module": "commonjs",
 		"removeComments": false,
 		"noLib": false,
@@ -14,49 +15,8 @@
 		"rootDir": "src"
 	},
 	"compileOnSave": false,
-	"atom": {
-		"rewriteTsconfig": true
-	},
-	"filesGlob": [
+	"include": [
 		"./node_modules/typescript/lib/lib.es6.d.ts",
-		"./typings/bundle.d.ts",
 		"./src/**/*.ts"
-	],
-	"files": [
-		"./node_modules/typescript/lib/lib.es6.d.ts",
-		"./typings/bundle.d.ts",
-		"./src/character.ts",
-		"./src/chars-style-map.ts",
-		"./src/core/character-identity.ts",
-		"./src/core/check-cross.ts",
-		"./src/core/compiler/inovel.ts",
-		"./src/core/compiler/rules/anchor.ts",
-		"./src/core/compiler/rules/name-part-of-serif.ts",
-		"./src/core/compiler/token.ts",
-		"./src/core/compiler/tokenizer.ts",
-		"./src/core/extract-character-names-in-text.ts",
-		"./src/core/extract-name-part-in-serif.ts",
-		"./src/core/identity.ts",
-		"./src/core/series-character.ts",
-		"./src/core/string/hankakukatakana-to-zenkakukatakana.ts",
-		"./src/core/string/katakana-to-hiragana.ts",
-		"./src/core/string/remove-white-spaces.ts",
-		"./src/core/string/zenkaku-to-hankaku.ts",
-		"./src/core/un-modify-title.ts",
-		"./src/interfaces.ts",
-		"./src/main.ts",
-		"./src/novel-base.ts",
-		"./src/novel.ts",
-		"./src/renderer.ts",
-		"./src/utility/detect-series.ts",
-		"./src/utility/series.ts",
-		"./src/utility/thread/extract-anchors.ts",
-		"./src/utility/thread/mark-anchor.ts",
-		"./src/utility/thread/modify-is-aa.ts",
-		"./src/utility/thread/modify-trip.ts",
-		"./src/utility/thread/paint-id.ts",
-		"./src/utility/thread/strong-mark-master.ts",
-		"./src/utility/thread/weak-mark-master.ts",
-		"./src/utility/world.ts"
 	]
 }

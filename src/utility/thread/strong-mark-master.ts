@@ -1,5 +1,5 @@
 import Character from '../../character';
-import Series from '../series';
+import Origin from '../origin';
 import { Thread, ThreadPostUser } from '../../interfaces';
 
 import World from '../world';
@@ -9,45 +9,42 @@ import extractNamePartInSerif from '../../core/extract-name-part-in-serif';
  * 本文と思われる投稿をマークします(強)
  * @param world World
  * @param posts 投稿の配列
- * @param series シリーズ
+ * @param origins SSのオリジン
  * @return マーク情報が付加された投稿の配列
  */
 export default function
-	<T extends Thread & {
-		posts: {
-			user: {
-				trip: string;
-			};
+	<P extends {
+		text: string;
+		number: number;
+		user: {
+			id: string;
+			trip: string;
 		};
-		series: Series[];
 	}>
 	(
 		world: World,
-		novel: T
+		posts: P[],
+		origins: Origin[]
 	):
-	(
-		T & {
-			posts: {
-				isMaster: boolean;
-			};
-		}
-	)[] {
+	(P & {
+		isMaster: boolean;
+	})[] {
 
-	// シリーズに登場するキャラクター
-	const allchars = world.getAllSeriesCharacters(novel.series);
+	// オリジンに登場するキャラクター
+	const allchars = world.getAllOriginCharacters(origins);
 
-	// 「シリーズのキャラが登場するSS形式の投稿」かどうか
+	// 「オリジンのキャラが登場するSS形式の投稿」かどうか
 	//  ￣￣￣￣￣￣￣￣￣￣￣￣￣
-	const isSerifses = novel.posts.map(post => {
+	const isSerifses = posts.map(post => {
 		return {
 			isSerifs: isSerifs(post.text),
 			user: post.user
 		};
 	});
 
-	const masters: (ThreadPostUser & { trip: string; })[] = [];
+	const masters: P['user'][] = [];
 
-	novel.posts.forEach((post, i) => {
+	posts.forEach((post, i) => {
 		const user = post.user;
 
 		if (masters.filter(x => x.id === user.id).length !== 0) {
@@ -78,7 +75,7 @@ export default function
 	});
 
 	// スキャン
-	novel.posts.forEach(post => {
+	posts.forEach(post => {
 		const isMaster = (
 			masters
 			.filter(x => x.id === post.user.id)
@@ -90,9 +87,9 @@ export default function
 		});
 	});
 
-	return novel;
+	return posts as any;
 
-	// 与えられたテキストが「シリーズのキャラが登場するSS形式の」文章であるかどうかを判定します。
+	// 与えられたテキストが「オリジンのキャラが登場するSS形式の」文章であるかどうかを判定します。
 	function isSerifs(text: string): boolean {
 		const chars: Character[] = [];
 

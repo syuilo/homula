@@ -6,21 +6,20 @@ import { Thread } from '../../interfaces';
  * @return マーク情報が付加された投稿の配列
  */
 export default function
-	<T extends Thread & {
-		posts: {
-			user: {
-				trip: string;
-			};
+	<P extends {
+		number: number;
+		text: string;
+		user: {
+			id: string;
+			trip: string;
 		};
 	}>
-	(novel: T):
-	(T & {
-		posts: {
-			isMaster: boolean;
-		};
-	}) {
+	(posts: P[]):
+	(P & {
+		isMaster: boolean;
+	})[] {
 
-	novel.posts.forEach((post, i) => {
+	posts.forEach((post, i) => {
 		let isMaster = false;
 
 		// >>1は問答無用で本文
@@ -29,12 +28,12 @@ export default function
 		}
 
 		// >>1とIDが同じだったら本文とみて間違いない
-		else if (post.user.id === novel.posts[0].user.id) {
+		else if (post.user.id === posts[0].user.id) {
 			isMaster = true;
 		}
 
 		// トリップ
-		else if (post.user.trip !== null && post.user.trip === novel.posts[0].user.trip) {
+		else if (post.user.trip !== null && post.user.trip === posts[0].user.trip) {
 			isMaster = true;
 		}
 
@@ -48,11 +47,7 @@ export default function
 		});
 	});
 
-	return <(T & {
-		posts: {
-			isMaster: boolean;
-		};
-	})>novel;
+	return posts as any;
 }
 
 function isSerifs(text: string): boolean {
