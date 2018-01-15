@@ -8,7 +8,7 @@ export default class extends Character {
 	/**
 	 * キャラクターの所属するオリジン(作品)
 	 */
-	private origin: string[];
+	public origin: string[];
 
 	constructor(options: {
 		id?: string;
