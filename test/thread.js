@@ -34,7 +34,7 @@ describe('thread', () => {
 		const text = posts.filter(p => p.isMaster).map(p => p.text).join('\n\n');
 		origin = homula.Utility.detectOrigin(world, testNovel.title, text);
 
-		should.equal(origin.id, 'a');
+		should.equal(origin[0].id, 'a');
 	});
 
 	let novel;
@@ -43,7 +43,7 @@ describe('thread', () => {
 		novel = new homula.Thread({
 			title: testNovel.title,
 			posts: posts,
-			characters: world.getAllOriginCharacters([origin])
+			characters: world.getAllOriginCharacters(origin)
 		});
 	});
 

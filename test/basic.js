@@ -68,13 +68,13 @@ describe('advance', () => {
 	it('detect', () => {
 		origin = homula.Utility.detectOrigin(world, null, testText);
 
-		should.equal(origin.id, 'a');
+		should.equal(origin[0].id, 'a');
 	});
 
 	it('analyze', () => {
 		novel = new homula.Novel({
 			text: testText,
-			characters: world.getAllOriginCharacters([origin])
+			characters: world.getAllOriginCharacters(origin)
 		});
 	});
 

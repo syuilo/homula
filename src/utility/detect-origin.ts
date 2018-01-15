@@ -6,14 +6,12 @@ import World from './world';
 
 /**
  * SSのオリジンを同定します
- * @param world World
- * @return 同定されたオリジン
  */
 export default function(
 	world: World,
 	title: string,
 	text: string,
-): Origin | Origin[] {
+): Origin[] {
 	const isCross = false; // TODO
 
 	// SS内に登場するすべてのキャラクター名(と思われる文字列)を抽出
@@ -70,7 +68,7 @@ export default function(
 		}
 
 		// それ以外は最有力候補をオリジンとして断定
-		return chart[0].origin;
+		return [chart[0].origin];
 	}
 
 	if (title != null) {
