@@ -1,6 +1,6 @@
 /*!
  * Homula
- * Copyright(c) 2016 syuilo
+ * Copyright(c) 2016-2018 syuilo
  * MIT Licensed
  */
 
