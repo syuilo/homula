@@ -2,7 +2,6 @@ import Origin from './origin';
 import extractCharacterNamesInText from '../core/extract-character-names-in-text';
 import unModifyTitle from '../core/un-modify-title';
 
-import { Novel, Thread, isThread } from '../interfaces';
 import World from './world';
 
 /**

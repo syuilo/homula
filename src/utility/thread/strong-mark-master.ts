@@ -1,6 +1,5 @@
 import Character from '../../character';
 import Origin from '../origin';
-import { Thread, ThreadPostUser } from '../../interfaces';
 
 import World from '../world';
 import extractNamePartInSerif from '../../core/extract-name-part-in-serif';

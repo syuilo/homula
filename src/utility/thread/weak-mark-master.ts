@@ -1,5 +1,3 @@
-import { Thread } from '../../interfaces';
-
 /**
  * 本文と思われる投稿をマークします(弱)
  * @param posts 投稿の配列
