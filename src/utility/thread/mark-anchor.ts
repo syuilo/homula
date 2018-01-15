@@ -1,35 +1,34 @@
 const assign = require('assign-deep');
 
-import { Thread } from '../../interfaces';
 import Token from '../../core/compiler/token';
 import { IAnchorToken } from '../../core/compiler/rules/anchor';
 import extractAnchors from './extract-anchors';
 
 /**
  * 投稿の被安価投稿をマークします
- * @param ss スレッド
- * @param posts スレッドの投稿
  * @return マーク情報が付加された投稿の配列
  */
 export default
-	<T extends Thread & {
-		posts: {
-			isMaster: boolean;
-			tokens: Token[];
-		};
+	<P extends {
+		isMaster: boolean;
+		text: string;
+		tokens: Token[];
+		number: number;
+		user: {
+			name: string;
+			id: string;
+		}
 	}>
-	(novel: T):
-	(T & {
-		posts: {
-			isAnchor: boolean;
-		};
-	})[] => {
+	(title: string, posts: P[]):
+	((P & {
+		isAnchor: boolean;
+	})[]) => {
 
 	// 本文内の安価リスト
 	const anchors: string[] = [];
 
 	// 本文だけ
-	novel.posts.filter(p => p.isMaster).forEach(p => {
+	posts.filter(p => p.isMaster).forEach(p => {
 		// 名前が安価している場合もある
 		const nameMatch = extractAnchors(p.user.name);
 		if (nameMatch !== null) {
@@ -43,7 +42,7 @@ export default
 	});
 
 	// SSのタイトル自体が安価している場合もある
-	const titileMatch = extractAnchors(novel.title);
+	const titileMatch = extractAnchors(title);
 	if (titileMatch !== null) {
 		titileMatch.forEach(a => anchors.push(a.substr(2)));
 	}
@@ -59,9 +58,9 @@ export default
 		}
 	});
 
-	const marked = <(T & {
+	const marked = <(P & {
 		isAnchor: boolean;
-	})[]>novel.posts.map(post => {
+	})[]>posts.map(post => {
 		let isAnchor = false;
 
 		// 本文から安価されている投稿

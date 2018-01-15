@@ -14,44 +14,43 @@ const should = require('should');
 
 const homula = require('../built/main');
 
-const allseries = require('./examples/series.json');
+const allorigin = require('./examples/origins.json');
 const allchars = require('./examples/characters.json');
-const world = new homula.Utility.World(allseries, allchars);
+const world = new homula.Utility.World(allorigin, allchars);
 
 describe('thread', () => {
 
-	let novel = require('./examples/ss/runba.json');
+	const testNovel = require('./examples/ss/runba.json');
 	const builthtml = require('./examples/ss/runba.built.html');
 	const builtcss = require('./examples/ss/runba.built.css');
 
-	it('modify trips', () => {
-		novel = homula.Utility.modifyTrip(novel);
+	let posts;
+	let origin;
+
+	it('detect origin', () => {
+		posts = testNovel.posts;
+		posts = posts.map(p => homula.Utility.modifyTrip(p));
+		posts = homula.Utility.weakMarkMaster(posts);
+		const text = posts.filter(p => p.isMaster).map(p => p.text).join('\n\n');
+		origin = homula.Utility.detectOrigin(world, testNovel.title, text);
+
+		should.equal(origin.id, 'a');
 	});
 
-	it('mark master', () => {
-		novel = homula.Utility.weakMarkMaster(novel);
-	});
-
-	let series;
-
-	it('detect', () => {
-		series = homula.Utility.detectSeries(world, novel);
-
-		should.equal(series.id, 'a');
-	});
+	let novel;
 
 	it('analyze', () => {
 		novel = new homula.Thread({
-			title: novel.title,
-			posts: novel.posts,
-			characters: world.getAllSeriesCharacters([series])
+			title: testNovel.title,
+			posts: posts,
+			characters: world.getAllOriginCharacters([origin])
 		});
 	});
 
 	it('compile to HTML', () => {
 		const html = novel.toHtml().join('<hr>');
 
-		should.equal(html, builthtml);
+		should.equal(html + '\r\n', builthtml);
 	});
 
 	it('get style', () => {

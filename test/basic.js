@@ -14,9 +14,9 @@ const should = require('should');
 
 const homula = require('../built/main');
 
-const allseries = require('./examples/series.json');
+const allorigin = require('./examples/origins.json');
 const allchars = require('./examples/characters.json');
-const world = new homula.Utility.World(allseries, allchars);
+const world = new homula.Utility.World(allorigin, allchars);
 
 describe('basic', () => {
 	let novel;
@@ -58,23 +58,23 @@ describe('basic', () => {
 });
 
 describe('advance', () => {
-	let novel = require('./examples/ss/test.json');
+	const testText = require('./examples/ss/test.json').text;
 	const builthtml = require('./examples/ss/test.built.html');
 	const builtcss = require('./examples/ss/test.built.css');
 
-	let series;
+	let novel;
+	let origin;
 
 	it('detect', () => {
-		series = homula.Utility.detectSeries(world, novel);
+		origin = homula.Utility.detectOrigin(world, null, testText);
 
-		should.equal(series.id, 'a');
+		should.equal(origin.id, 'a');
 	});
 
 	it('analyze', () => {
 		novel = new homula.Novel({
-			title: novel.title,
-			text: novel.text,
-			characters: world.getAllSeriesCharacters([series])
+			text: testText,
+			characters: world.getAllOriginCharacters([origin])
 		});
 	});
 

@@ -1,38 +1,38 @@
 [
 	{
-		"series": "a",
+		"origin": "a",
 		"name": ["まどか", "まど"],
 		"color": "#f79286"
 	}, {
-		"series": "a",
+		"origin": "a",
 		"name": ["ほむら", "ほむ", "ほむほむ"],
 		"color": "#8f5ab5"
 	}, {
-		"series": "a",
+		"origin": "a",
 		"name": ["マミ"],
 		"color": "#f9b30e"
 	}, {
-		"series": "a",
+		"origin": "a",
 		"name": ["さやか", "さや"],
 		"color": "#52c7c7"
 	}, {
-		"series": "a",
+		"origin": "a",
 		"name": ["杏子", "あんこ", "あん"],
 		"color": "#e82f36"
 	}, {
-		"series": "a",
+		"origin": "a",
 		"name": ["キュゥべえ", "QB"],
 		"color": "#929292"
 	}, {
-		"series": "b",
+		"origin": "b",
 		"name": ["あかり", "あか"],
 		"color": "#ff2445"
 	}, {
-		"series": "b",
+		"origin": "b",
 		"name": ["向日葵", "ひま"],
 		"color": "#416798"
 	}, {
-		"series": "b",
+		"origin": "b",
 		"name": ["櫻子", "さく"],
 		"color": "#e2b03a"
 	}
