@@ -26,7 +26,7 @@
 
 マミ「暁美さnまどか「ほむらちゃほむほむ」
 ```
-↑ Compile using the **Homula**... ↓
+↑ Compile using **Homula**... ↓
 ``` html
 <style>.a{color:#f79286}.b{color:#8f5ab5}.c{color:#f9b30e}.d{color:#52c7c7}.e{color:#e82f36}.f{color:#929292}</style>
 
@@ -142,7 +142,7 @@ const world = new homula.Utility.World(allorigin, allchars);
 const title = '櫻子「ナデナデシテー」';
 const text = '＜向日葵の家＞\n\n櫻子「向日葵～……」\n\n向日葵「何ですの？」\n\n...';
 
-const origin = homula.Utility.detectOrigin(world, title, text);
+const [origin] = homula.Utility.detectOrigin(world, title, text);
 
 console.log(origin.id); // <- b
 ```
