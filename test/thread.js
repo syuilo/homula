@@ -50,13 +50,13 @@ describe('thread', () => {
 	it('compile to HTML', () => {
 		const html = novel.toHtml().join('<hr>');
 
-		should.equal(html + '\r\n', builthtml);
+		should.equal(html.trim(), builthtml.trim());
 	});
 
 	it('get style', () => {
 		const css = novel.getCSS();
 
-		should.equal(css, builtcss);
+		should.equal(css.trim(), builtcss.trim());
 	});
 
 	it('get characters statistics', () => {
