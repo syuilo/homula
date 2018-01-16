@@ -81,12 +81,12 @@ describe('advance', () => {
 	it('compile to HTML', () => {
 		const html = novel.toHtml();
 
-		should.equal(html, builthtml);
+		should.equal(html.trim(), builthtml.trim());
 	});
 
 	it('get style', () => {
 		const css = novel.getCSS();
 
-		should.equal(css, builtcss);
+		should.equal(css.trim(), builtcss.trim());
 	});
 });
