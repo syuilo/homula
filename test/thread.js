@@ -12,7 +12,7 @@ require.extensions['.css'] = (module, filename) => {
 
 const should = require('should');
 
-const homula = require('../built/main');
+const homula = require('../');
 
 const allorigin = require('./examples/origins.json');
 const allchars = require('./examples/characters.json');
