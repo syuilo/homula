@@ -51,13 +51,13 @@ export default class {
 	/**
 	 * このマップに対応するCSS文字列を生成します
 	 */
-	public toCSS(novel: Novel | Thread): string {
+	public toCSS(novel: Novel | Thread, prefix?: string): string {
 		return this.chars
 			.map(c => {
-				if (novel.id === null) {
+				if (prefix == null) {
 					return `.${c.class}{color:${c.color}}`;
 				} else {
-					return `[data-id='${novel.id}'] .${c.class}{color:${c.color}}`;
+					return `${prefix} .${c.class}{color:${c.color}}`;
 				}
 			})
 			.join('');

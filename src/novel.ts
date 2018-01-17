@@ -61,7 +61,6 @@ export class Novel extends NovelBase {
 		this.charactersStyle = new CharsStyleMap(this.characters);
 
 		this.tokens = tokenize({
-			id: this.id,
 			characters: this.characters
 		}, this.text, [name]);
 	}
@@ -151,7 +150,6 @@ export class Thread extends NovelBase {
 			text: p.text,
 			isMaster: p.isMaster,
 			tokens: tokenize({
-				id: this.id,
 				characters: this.characters
 			}, p.text, [anchor, name])
 		}));

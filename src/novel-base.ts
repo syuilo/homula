@@ -7,7 +7,6 @@ import CharsStyleMap from './chars-style-map';
 import Renderer from './renderer';
 
 export interface OptionsBase {
-	id?: string;
 	title?: string;
 	characters: {
 		id?: string;
@@ -25,8 +24,6 @@ export type CharactersStatistics = {
  * ノベル基底クラス
  */
 export abstract class NovelBase {
-	public id: string;
-
 	/**
 	 * ノベル タイトル
 	 */
@@ -47,8 +44,6 @@ export abstract class NovelBase {
 	 * @param options ノベル情報
 	 */
 	constructor(options: OptionsBase) {
-		this.id = options.id === undefined ? null : options.id;
-
 		this.title = options.title || null;
 	}
 
