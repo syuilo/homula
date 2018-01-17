@@ -9,19 +9,16 @@ import { INamePartToken } from './core/compiler/rules/name-part-of-serif';
 /**
  * トークンに基づいてHTMLを生成するレンダラー。
  * このクラスを継承して、レンダリングをカスタマイズすることも出来ます
- * @class Renderer
  */
 export default class Renderer {
 
 	/**
 	 * レンダリングに使用されるキャラクタースタイル
-	 * @member Renderer.style
 	 */
 	public style: CharsStyleMap;
 
 	/**
 	 * レンダラーを初期化します。
-	 * @constructor
 	 * @param style レンダリングに使用するキャラクタースタイル
 	 */
 	constructor(style: CharsStyleMap) {
@@ -30,7 +27,6 @@ export default class Renderer {
 
 	/**
 	 * 与えられたトークンに基づいてHTMLを生成します。
-	 * @method Renderer#render
 	 * @param tokens 一連のトークンの配列
 	 * @return HTML
 	 */
@@ -40,8 +36,6 @@ export default class Renderer {
 
 	/**
 	 * トークンレンダラー振り分け
-	 * @method Renderer#renderToken
-	 * @private
 	 * @param token トークン
 	 * @return HTML
 	 */
@@ -64,8 +58,6 @@ export default class Renderer {
 
 	/**
 	 * テキスト トークンをレンダリングします。
-	 * @method Renderer#renderTextToken
-	 * @private
 	 * @param token テキスト トークン
 	 * @return HTML
 	 */
@@ -75,8 +67,6 @@ export default class Renderer {
 
 	/**
 	 * 安価 トークンをレンダリングします。
-	 * @method Renderer#renderAnchorToken
-	 * @private
 	 * @param token 安価 トークン
 	 * @return HTML
 	 */
@@ -86,8 +76,6 @@ export default class Renderer {
 
 	/**
 	 * セリフ内キャラクター名パート トークンをレンダリングします。
-	 * @method Renderer#renderCharacterNameToken
-	 * @private
 	 * @param token セリフ内キャラクター名パート トークン
 	 * @return HTML
 	 */

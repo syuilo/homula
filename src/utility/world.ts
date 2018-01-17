@@ -6,11 +6,11 @@ import Character from '../core/origin-character';
  */
 export default class {
 
-	public origin: Origin[];
+	public origins: Origin[];
 
 	public characters: Character[];
 
-	constructor(origin: {
+	constructor(origins: {
 		id: string;
 		title: string | string[];
 	}[], characters: {
@@ -19,7 +19,15 @@ export default class {
 		color: string;
 		origin: string | string[];
 	}[]) {
-		this.origin = origin.map(s => {
+		if (origins == null) {
+			throw 'empty origins'
+		}
+
+		if (characters == null) {
+			throw 'empty characters'
+		}
+
+		this.origins = origins.map(s => {
 			return new Origin(s);
 		});
 
@@ -30,14 +38,13 @@ export default class {
 
 	/**
 	 * 与えられたオリジンに登場するキャラクターを取得します。
-	 * @param origin オリジン
-	 * @method World#getAllOriginCharacters
+	 * @param origins オリジン
 	 */
-	public getAllOriginCharacters(origin: Origin[]): Character[] {
+	public getAllOriginCharacters(origins: Origin[]): Character[] {
 		return this.characters.filter(c => {
 			let found = false;
 
-			origin.forEach(origin => {
+			origins.forEach(origin => {
 				if (c.origin.indexOf(origin.id) !== -1) {
 					found = true;
 				}

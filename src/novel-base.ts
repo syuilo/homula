@@ -23,7 +23,6 @@ export type CharactersStatistics = {
 
 /**
  * ノベル基底クラス
- * @class NovelBase
  */
 export abstract class NovelBase {
 	public id: string;

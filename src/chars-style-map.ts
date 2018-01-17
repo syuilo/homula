@@ -24,12 +24,10 @@ export type charItem = {
 
 /**
  * CSS用キャラクターマップクラス
- * @class CharsStyleMap
  */
 export default class {
 	/**
 	 * キャラクター アイテムs
-	 * @member CharMap.chars
 	 */
 	public chars: charItem[];
 
@@ -45,7 +43,6 @@ export default class {
 
 	/**
 	 * 指定されたIDを持つキャラクターを取得します
-	 * @method CharMap#findById
 	 */
 	public findById(characterId: string): charItem {
 		return this.chars.filter(c => c.id === characterId)[0];
@@ -53,7 +50,6 @@ export default class {
 
 	/**
 	 * このマップに対応するCSS文字列を生成します
-	 * @method CharMap#findById
 	 */
 	public toCSS(novel: Novel | Thread): string {
 		return this.chars

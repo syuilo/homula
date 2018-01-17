@@ -26,15 +26,10 @@ export default function(
 		.filter((x, i, self) => self.indexOf(x) === i);
 
 	// 登場頻度ランキング
-	const chart: {
-		origin: Origin;
-		found: string[]
-	}[] = world.origin.map(origin => {
-		return {
-			origin: origin,
-			found: []
-		};
-	});
+	const chart = world.origins.map(origin => ({
+		origin: origin,
+		found: []
+	}));
 
 	world.characters.forEach(char => {
 		char.origin.forEach(charOrigin => {
@@ -82,7 +77,7 @@ export default function(
 		const originInTitle =
 			textInBrackets === null
 				? null
-				: world.origin
+				: world.origins
 					.filter(origin =>
 						textInBrackets.map(text =>
 							origin.match(text)

@@ -2,7 +2,6 @@ import Character from '../character';
 
 /**
  * キャラクター
- * @class OriginCharacter
  */
 export default class extends Character {
 	/**

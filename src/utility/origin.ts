@@ -1,6 +1,5 @@
 /**
  * オリジン
- * @class Origin
  */
 export default class {
 	id: string;
@@ -16,7 +15,6 @@ export default class {
 
 	/**
 	 * 名前のアイデンティティがこのオリジンであるか確認します
-	 * @method Origin#match
 	 */
 	public match(q: string): boolean {
 		return this.title.indexOf(q) !== -1;
