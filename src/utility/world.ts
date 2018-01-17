@@ -19,11 +19,11 @@ export default class {
 		color: string;
 		origin: string | string[];
 	}[]) {
-		if (origins == null) {
+		if (origins == null || origins.length == 0) {
 			throw 'empty origins'
 		}
 
-		if (characters == null) {
+		if (characters == null || characters.length == 0) {
 			throw 'empty characters'
 		}
 
