@@ -16,7 +16,7 @@ const homula = require('../');
 
 const allorigin = require('./examples/origins.json');
 const allchars = require('./examples/characters.json');
-const world = new homula.Utility.World(allorigin, allchars);
+const world = new homula.utility.World(allorigin, allchars);
 
 describe('basic', () => {
 	let novel;
@@ -39,11 +39,16 @@ describe('basic', () => {
 		const html = novel.toHtml();
 
 		should.equal(html,
-			'＜向日葵の家＞<br><br><b class=b>櫻子</b>「向日葵～……」<br><br><b class=a>向日葵</b>「何ですの？」<br><br>...');
+			'＜向日葵の家＞<br><br><b style="color:#e2b03a">櫻子</b>「向日葵～……」<br><br><b style="color:#416798">向日葵</b>「何ですの？」<br><br>...');
 	});
 
-	it('get style', () => {
-		const css = novel.getCSS();
+	it('compile to HTML (Using ExtractedStyleRenderer)', () => {
+		const renderer = new homula.renderers.ExtractedStyleRenderer(novel);
+		const html = renderer.render();
+		const css = renderer.renderCss();
+
+		should.equal(html,
+			'＜向日葵の家＞<br><br><b class=b>櫻子</b>「向日葵～……」<br><br><b class=a>向日葵</b>「何ですの？」<br><br>...');
 
 		should.equal(css,
 			'.a{color:#416798}.b{color:#e2b03a}');
@@ -66,7 +71,7 @@ describe('advance', () => {
 	let origin;
 
 	it('detect', () => {
-		origin = homula.Utility.detectOrigin(world, null, testText);
+		origin = homula.utility.detectOrigin(world, null, testText);
 
 		should.equal(origin[0].id, 'a');
 	});
@@ -78,15 +83,12 @@ describe('advance', () => {
 		});
 	});
 
-	it('compile to HTML', () => {
-		const html = novel.toHtml();
+	it('compile to HTML (Using ExtractedStyleRenderer)', () => {
+		const renderer = new homula.renderers.ExtractedStyleRenderer(novel);
+		const html = renderer.render();
+		const css = renderer.renderCss();
 
 		should.equal(html.trim(), builthtml.trim());
-	});
-
-	it('get style', () => {
-		const css = novel.getCSS();
-
 		should.equal(css.trim(), builtcss.trim());
 	});
 });

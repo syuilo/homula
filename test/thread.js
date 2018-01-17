@@ -16,7 +16,7 @@ const homula = require('../');
 
 const allorigin = require('./examples/origins.json');
 const allchars = require('./examples/characters.json');
-const world = new homula.Utility.World(allorigin, allchars);
+const world = new homula.utility.World(allorigin, allchars);
 
 describe('thread', () => {
 
@@ -29,10 +29,10 @@ describe('thread', () => {
 
 	it('detect origin', () => {
 		posts = testNovel.posts;
-		posts = posts.map(p => homula.Utility.modifyTrip(p));
-		posts = homula.Utility.weakMarkMaster(posts);
+		posts = posts.map(p => homula.utility.modifyTrip(p));
+		posts = homula.utility.weakMarkMaster(posts);
 		const text = posts.filter(p => p.isMaster).map(p => p.text).join('\n\n');
-		origin = homula.Utility.detectOrigin(world, testNovel.title, text);
+		origin = homula.utility.detectOrigin(world, testNovel.title, text);
 
 		should.equal(origin[0].id, 'a');
 	});
@@ -47,15 +47,12 @@ describe('thread', () => {
 		});
 	});
 
-	it('compile to HTML', () => {
-		const html = novel.toHtml().join('<hr>');
+	it('compile to HTML (Using ExtractedStyleRenderer)', () => {
+		const renderer = new homula.renderers.ExtractedStyleRenderer(novel);
+		const html = renderer.render().join('<hr>');
+		const css = renderer.renderCss();
 
 		should.equal(html.trim(), builthtml.trim());
-	});
-
-	it('get style', () => {
-		const css = novel.getCSS();
-
 		should.equal(css.trim(), builtcss.trim());
 	});
 

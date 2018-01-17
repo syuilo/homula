@@ -5,18 +5,108 @@
 // thread ... スレッド形式
 // ================================================================
 
-import { NovelBase, OptionsBase, CharactersStatistics } from './novel-base';
-
 import Character from './character';
-import CharsStyleMap from './chars-style-map';
 
 import Token from './core/compiler/token';
 import tokenize from './core/compiler/tokenizer';
-import Renderer from './renderer';
+import { SimpleRenderer } from './renderer';
 import { INamePartToken } from './core/compiler/rules/name-part-of-serif';
 
 import anchor from './core/compiler/rules/anchor';
 import name from './core/compiler/rules/name-part-of-serif';
+
+export interface OptionsBase {
+	title?: string;
+	characters: {
+		id?: string;
+		name: string[];
+		color: string;
+	}[];
+}
+
+export type CharactersStatistics = {
+	id: string;
+	onStageRatio: number;
+}[];
+
+/**
+ * ノベル基底クラス
+ */
+export abstract class NovelBase {
+	abstract type: string;
+
+	/**
+	 * ノベル タイトル
+	 */
+	public title: string;
+
+	/**
+	 * 登場人物
+	 */
+	public characters: Character[];
+
+	public abstract toHtml();
+
+	/**
+	 * ノベルを初期化します。
+	 * @param options ノベル情報
+	 */
+	constructor(options: OptionsBase) {
+		this.title = options.title || null;
+	}
+
+	abstract getCharactersStatistics(): CharactersStatistics;
+
+	/**
+	 * キャラクターの統計を計算します
+	 * @param characters 対象の全てのキャラクター
+	 * @return 統計情報
+	 */
+	protected calcCharactersStatistics(characters: Character[]): CharactersStatistics {
+		// すべてのキャラの登場回数
+		const allCount = characters.length;
+
+		// 重複したキャラクターを除去
+		const uniqueFoundChars =
+			characters
+			.filter((c, i, self) =>
+				self.map(c => c.id).indexOf(c.id) === i);
+
+		const returns = uniqueFoundChars.map(char => {
+			// このキャラが何回登場したか
+			const onStageCount =
+				characters.filter(c => c.id.toString() === char.id.toString()).length;
+
+			// このキャラの登場の割合は、(このキャラの登場回数 / すべてのキャラの登場回数) で求める
+			const onStageRatio = onStageCount / allCount;
+
+			return {
+				id: char.id,
+				onStageRatio: onStageRatio
+			};
+		})
+
+		// 登場頻度で降順ソート
+		.sort((a, b) => {
+			if (a.onStageRatio > b.onStageRatio) {
+				return -1;
+			} else if (a.onStageRatio < b.onStageRatio) {
+				return 1;
+			} else {
+				return 0;
+			}
+		});
+
+		return returns;
+	}
+
+	/**
+	 * ノベルを読了するのに要すると予想される時間を取得します(minutes)
+	 */
+	protected getTime(text: string) {
+		return Math.floor(text.length / 18) / 60;
+	}
+}
 
 /**
  * 本文のみのノベル
@@ -24,7 +114,7 @@ import name from './core/compiler/rules/name-part-of-serif';
 export class Novel extends NovelBase {
 
 	// type of myself
-	type: 'novel';
+	type: 'novel' = 'novel';
 
 	/**
 	 * 本文
@@ -34,7 +124,7 @@ export class Novel extends NovelBase {
 	/**
 	 * 本文のトークン
 	 */
-	private tokens: Token[];
+	public tokens: Token[];
 
 	/**
 	 * このノベルを読了するのに要すると予想される時間(minutes)
@@ -58,29 +148,9 @@ export class Novel extends NovelBase {
 			return new Character(c);
 		});
 
-		this.charactersStyle = new CharsStyleMap(this.characters);
-
 		this.tokens = tokenize({
 			characters: this.characters
 		}, this.text, [name]);
-	}
-
-	/**
-	 * このノベル本文のHTMLを生成します
-	 * @param renderer? レンダラー
-	 * @return HTML
-	 */
-	public toHtml(renderer?: Renderer): string {
-		renderer = renderer || new Renderer(this.charactersStyle);
-		return renderer.render(this.tokens);
-	}
-
-	/**
-	 * このノベル本文のCSSを取得します
-	 * @return CSS
-	 */
-	public getCSS(): string {
-		return this.charactersStyle.toCSS(this);
 	}
 
 	/**
@@ -107,6 +177,11 @@ export class Novel extends NovelBase {
 
 		return this.calcCharactersStatistics(foundCharacters);
 	}
+
+	public toHtml() {
+		const renderer = new SimpleRenderer(this);
+		return renderer.render();
+	}
 }
 
 /**
@@ -115,7 +190,7 @@ export class Novel extends NovelBase {
 export class Thread extends NovelBase {
 
 	// type of myself
-	type: 'thread';
+	type: 'thread' = 'thread';
 
 	/**
 	 * 投稿
@@ -144,8 +219,6 @@ export class Thread extends NovelBase {
 			return new Character(c);
 		});
 
-		this.charactersStyle = new CharsStyleMap(this.characters);
-
 		this.posts = posts.map(p => ({
 			text: p.text,
 			isMaster: p.isMaster,
@@ -153,24 +226,6 @@ export class Thread extends NovelBase {
 				characters: this.characters
 			}, p.text, [anchor, name])
 		}));
-	}
-
-	/**
-	 * このノベル本文のHTMLを生成します
-	 * @param renderer? レンダラー
-	 * @return それぞれの投稿のHTML
-	 */
-	public toHtml(renderer?: Renderer): string[] {
-		renderer = renderer || new Renderer(this.charactersStyle);
-		return this.posts.map(p => renderer.render(p.tokens));
-	}
-
-	/**
-	 * このノベル本文のCSSを取得します
-	 * @return CSS
-	 */
-	public getCSS(): string {
-		return this.charactersStyle.toCSS(this);
 	}
 
 	/**
@@ -208,5 +263,10 @@ export class Thread extends NovelBase {
 			.filter(p => p.isMaster)
 			.map(p => p.text)
 			.join('\n\n'));
+	}
+
+	public toHtml() {
+		const renderer = new SimpleRenderer(this);
+		return renderer.render();
 	}
 }

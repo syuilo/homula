@@ -1,5 +1,6 @@
 import * as escape from 'escape-html';
 
+import { Novel, Thread } from './novel';
 import CharsStyleMap from './chars-style-map';
 
 import Token from './core/compiler/token';
@@ -10,28 +11,31 @@ import { INamePartToken } from './core/compiler/rules/name-part-of-serif';
  * トークンに基づいてHTMLを生成するレンダラー。
  * このクラスを継承して、レンダリングをカスタマイズすることも出来ます
  */
-export default class Renderer {
+export default abstract class Renderer {
+	protected abstract renderText: (token: Token) => string;
+	protected abstract renderAnchor: (token: IAnchorToken) => string;
+	protected abstract renderChar: (token: INamePartToken) => string;
+
+	protected novel: Novel | Thread;
 
 	/**
-	 * レンダリングに使用されるキャラクタースタイル
+	 * レンダラーを初期化します
+	 * @param novel
 	 */
-	public style: CharsStyleMap;
-
-	/**
-	 * レンダラーを初期化します。
-	 * @param style レンダリングに使用するキャラクタースタイル
-	 */
-	constructor(style: CharsStyleMap) {
-		this.style = style;
+	constructor(novel: Novel | Thread) {
+		this.novel = novel;
 	}
 
 	/**
-	 * 与えられたトークンに基づいてHTMLを生成します。
-	 * @param tokens 一連のトークンの配列
+	 * HTMLを生成します。
 	 * @return HTML
 	 */
-	public render(tokens: Token[]): string {
-		return tokens.map(this.renderToken.bind(this)).join('');
+	public render(): string | string[] {
+		if (this.novel.type == 'novel') {
+			return this.novel.tokens.map(this.renderToken.bind(this)).join('');
+		} else {
+			return this.novel.posts.map(p => p.tokens.map(this.renderToken.bind(this)).join(''));
+		}
 	}
 
 	/**
@@ -41,46 +45,40 @@ export default class Renderer {
 	 */
 	private renderToken(token: Token): string {
 		switch (token.type) {
-
-		case 'text':
-			return this.renderTextToken(token);
-
-		case 'anchor':
-			return this.renderAnchorToken(<IAnchorToken>token);
-
-		case 'character-name':
-			return this.renderCharacterNameToken(<INamePartToken>token);
-
-		default:
-			throw `Unknown token "${token.type}"`;
+			case 'text': return this.renderText(token);
+			case 'anchor': return this.renderAnchor(<IAnchorToken>token);
+			case 'character-name': return this.renderChar(<INamePartToken>token);
+			default: throw `Unknown token "${token.type}"`;
 		}
 	}
+}
 
-	/**
-	 * テキスト トークンをレンダリングします。
-	 * @param token テキスト トークン
-	 * @return HTML
-	 */
-	private renderTextToken(token: Token): string {
-		return escape(token.text).replace(/\n/g, '<br>');
-	}
+export class SimpleRenderer extends Renderer {
+	renderText = token => escape(token.text).replace(/\n/g, '<br>');
+	renderAnchor = token => `<span class=anchor data-target="${token.target}">${escape(token.text)}</span>`;
+	renderChar = token => `<b style="color:${token.character.color}">${escape(token.text)}</b>`;
+}
 
-	/**
-	 * 安価 トークンをレンダリングします。
-	 * @param token 安価 トークン
-	 * @return HTML
-	 */
-	private renderAnchorToken(token: IAnchorToken): string {
-		return `<span class=anchor data-target="${token.target}">${escape(token.text)}</span>`;
-	}
-
-	/**
-	 * セリフ内キャラクター名パート トークンをレンダリングします。
-	 * @param token セリフ内キャラクター名パート トークン
-	 * @return HTML
-	 */
-	private renderCharacterNameToken(token: INamePartToken): string {
+export class ExtractedStyleRenderer extends Renderer {
+	renderText = token => escape(token.text).replace(/\n/g, '<br>');
+	renderAnchor = token => `<span class=anchor data-target="${token.target}">${escape(token.text)}</span>`;
+	renderChar = token => {
 		const klass = this.style.findById(token.character.id).class;
 		return `<b class=${klass}>${escape(token.text)}</b>`;
+	};
+
+	/**
+	 * レンダリングに使用されるキャラクタースタイル
+	 */
+	public style: CharsStyleMap;
+
+	constructor(novel: Novel | Thread) {
+		super(novel);
+
+		this.style = new CharsStyleMap(novel.characters);
+	}
+
+	public renderCss(prefix?: string) {
+		return this.style.toCSS(this.novel, prefix);
 	}
 }
