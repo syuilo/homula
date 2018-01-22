@@ -14,6 +14,7 @@ import detectOrigin from './utility/detect-origin';
 import modifyTrip from './utility/thread/modify-trip';
 import weakMarkMaster from './utility/thread/weak-mark-master';
 import strongMarkMaster from './utility/thread/strong-mark-master';
+import isSs from './utility/thread/is-ss';
 
 export = {
 	Novel,
@@ -29,6 +30,7 @@ export = {
 		detectOrigin,
 		modifyTrip,
 		weakMarkMaster,
-		strongMarkMaster
+		strongMarkMaster,
+		isSs
 	}
 };
