@@ -13,7 +13,7 @@ import { SimpleRenderer } from './renderer';
 import { INamePartToken } from './core/compiler/rules/name-part-of-serif';
 
 import anchor from './core/compiler/rules/anchor';
-import name from './core/compiler/rules/name-part-of-serif';
+import name, { fast as fastName } from './core/compiler/rules/name-part-of-serif';
 
 export interface OptionsBase {
 	title?: string;
@@ -210,10 +210,12 @@ export class Thread extends NovelBase {
 			text: string;
 			isMaster: boolean;
 		}[];
+		fast?: boolean;
 	}) {
 		super(options);
 
 		const posts = options.posts;
+		const fast = options.fast;
 
 		this.characters = options.characters.map(c => {
 			return new Character(c);
@@ -224,7 +226,7 @@ export class Thread extends NovelBase {
 			isMaster: p.isMaster,
 			tokens: tokenize({
 				characters: this.characters
-			}, p.text, [anchor, name])
+			}, p.text, [anchor].concat(p.isMaster ? fast ? fastName : name : []))
 		}));
 	}
 

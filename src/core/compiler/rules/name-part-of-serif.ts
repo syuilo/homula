@@ -10,6 +10,11 @@ export default {
 	exec: exec
 };
 
+export const fast = {
+	name: 'name-part-of-serif',
+	exec: fastExec
+};
+
 export interface INamePartToken extends Token {
 	character: Character;
 }
@@ -189,6 +194,41 @@ function exec(novel: INovel, text: string): Token[] {
 	}
 
 	return null;
+}
+
+function fastExec(novel: INovel, text: string): Token[] {
+	if (novel.characters === null || novel.characters.length === 0) {
+		return null;
+	}
+
+	const part = extractNamePart(text);
+
+	if (part === null) {
+		const ind = text.indexOf('\n');
+		if (ind > 0) {
+			return [createTextToken(text.substring(0, ind + 1))];
+		} else {
+			return [createTextToken(text)];
+		}
+	}
+
+	const matchChars = novel.characters
+		.filter(c => c.match(part));
+
+	// キャラが見つかったら
+	if (matchChars.length !== 0) {
+		const matchChar = matchChars[0];
+
+		const token = createCharacterNameToken(part, matchChar);
+		return [token];
+	}
+
+	const ind = text.indexOf('\n');
+	if (ind > 0) {
+		return [createTextToken(text.substring(0, ind + 1))];
+	} else {
+		return [createTextToken(text)];
+	}
 }
 
 function createTextToken(text: string): Token {

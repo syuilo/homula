@@ -1,5 +1,5 @@
 import Origin from './origin';
-import extractCharacterNamesInText from '../core/extract-character-names-in-text';
+import extractCharacterNamesInText, { fast as fastExtractCharacterNamesInText } from '../core/extract-character-names-in-text';
 import unModifyTitle from '../core/un-modify-title';
 
 import World from './world';
@@ -11,17 +11,17 @@ export default function(
 	world: World,
 	title: string,
 	text: string,
+	fast = false
 ): Origin[] {
 	const isCross = false; // TODO
 
 	// SS内に登場するすべてのキャラクター名(と思われる文字列)を抽出
 	const extractedNames =
-		extractCharacterNamesInText(
+		(fast ? fastExtractCharacterNamesInText : extractCharacterNamesInText)(
 			// キャラクター名がタイトルに含まれている場合が多い
 			// 【安価】のようにタイトルは装飾されていることも多いので非装飾化
 			unModifyTitle(title || '') + '\n' +
-			text
-		)
+			text)
 		// 重複は除去
 		.filter((x, i, self) => self.indexOf(x) === i);
 

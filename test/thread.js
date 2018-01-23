@@ -60,6 +60,6 @@ describe('thread', () => {
 		const statistics = novel.getCharactersStatistics();
 
 		should.equal(statistics[0].onStageRatio,
-			0.46596858638743455);
+			0.4627659574468085);
 	});
 });

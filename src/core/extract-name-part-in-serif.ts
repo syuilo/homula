@@ -42,3 +42,22 @@ export default (serif: string): string => {
 
 	return null;
 };
+
+/**
+ * セリフ行の中のキャラクター名部分を抽出します(高速、低精度)
+ * @param serif セリフ
+ * @return キャラクター名部分
+ */
+export const fast = (serif: string): string => {
+	if (serif === '') {
+		return null;
+	}
+
+	const i = serif.indexOf('「');
+
+	if (i != -1) {
+		return serif.substring(0, i);
+	} else {
+		return null;
+	}
+};
