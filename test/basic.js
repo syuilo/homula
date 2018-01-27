@@ -92,3 +92,26 @@ describe('advance', () => {
 		should.equal(css.trim(), builtcss.trim());
 	});
 });
+
+it('fast', () => {
+	const novel = new homula.Thread({
+		title: '櫻子「ナデナデシテー」',
+		posts: [{
+			text: '＜向日葵の家＞\n\n櫻子「向日葵～……」\n\n向日葵「何ですの？」\n\n...',
+			isMaster: true
+		}],
+		characters: [{
+			name: ['向日葵', 'ひま'],
+			color: '#416798'
+		}, {
+			name: ['櫻子', 'さく'],
+			color: '#e2b03a'
+		}],
+		fast: true
+	});
+
+	const html = novel.toHtml();
+
+	should.equal(html[0],
+		'＜向日葵の家＞<br><br><b style="color:#e2b03a">櫻子</b>「向日葵～……」<br><br><b style="color:#416798">向日葵</b>「何ですの？」<br><br>...');
+});

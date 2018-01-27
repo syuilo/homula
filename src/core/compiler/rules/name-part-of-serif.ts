@@ -205,7 +205,7 @@ function fastExec(novel: INovel, buffer: string): Token[] {
 
 	if (part === null) {
 		const ind = buffer.indexOf('\n');
-		if (ind > 0) {
+		if (ind > -1) {
 			return [createTextToken(buffer.substring(0, ind + 1))];
 		} else {
 			return [createTextToken(buffer)];
@@ -224,7 +224,7 @@ function fastExec(novel: INovel, buffer: string): Token[] {
 	}
 
 	const ind = buffer.indexOf('\n');
-	if (ind > 0) {
+	if (ind > -1) {
 		return [createTextToken(buffer.substring(0, ind + 1))];
 	} else {
 		return [createTextToken(buffer)];
