@@ -25,12 +25,12 @@ export interface INamePartToken extends Token {
 const separators =
 	['・', '、', '&', '＆', ' '];
 
-function exec(novel: INovel, text: string): Token[] {
+function exec(novel: INovel, buffer: string): Token[] {
 	if (novel.characters === null || novel.characters.length === 0) {
 		return null;
 	}
 
-	const part = extractNamePart(text);
+	const part = extractNamePart(buffer);
 
 	if (part === null) {
 		return null;
@@ -196,19 +196,19 @@ function exec(novel: INovel, text: string): Token[] {
 	return null;
 }
 
-function fastExec(novel: INovel, text: string): Token[] {
+function fastExec(novel: INovel, buffer: string): Token[] {
 	if (novel.characters === null || novel.characters.length === 0) {
 		return null;
 	}
 
-	const part = extractNamePart(text);
+	const part = extractNamePart(buffer);
 
 	if (part === null) {
-		const ind = text.indexOf('\n');
+		const ind = buffer.indexOf('\n');
 		if (ind > 0) {
-			return [createTextToken(text.substring(0, ind + 1))];
+			return [createTextToken(buffer.substring(0, ind + 1))];
 		} else {
-			return [createTextToken(text)];
+			return [createTextToken(buffer)];
 		}
 	}
 
@@ -223,11 +223,11 @@ function fastExec(novel: INovel, text: string): Token[] {
 		return [token];
 	}
 
-	const ind = text.indexOf('\n');
+	const ind = buffer.indexOf('\n');
 	if (ind > 0) {
-		return [createTextToken(text.substring(0, ind + 1))];
+		return [createTextToken(buffer.substring(0, ind + 1))];
 	} else {
-		return [createTextToken(text)];
+		return [createTextToken(buffer)];
 	}
 }
 
