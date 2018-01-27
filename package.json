@@ -1,6 +1,6 @@
 {
   "name": "homula",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "A novel analyzer",
   "main": "./built/index.js",
   "types": "./built/index.d.ts",
