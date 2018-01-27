@@ -219,8 +219,14 @@ function fastExec(novel: INovel, buffer: string): Token[] {
 	if (matchChars.length !== 0) {
 		const matchChar = matchChars[0];
 
-		const token = createCharacterNameToken(part, matchChar);
-		return [token];
+		const name = createCharacterNameToken(part, matchChar);
+
+		const ind = buffer.indexOf('\n');
+		const text = ind > -1
+			? createTextToken(buffer.substring(name.text.length, ind + 1))
+			: createTextToken(buffer.substring(name.text.length));
+
+		return [name, text];
 	}
 
 	const ind = buffer.indexOf('\n');
