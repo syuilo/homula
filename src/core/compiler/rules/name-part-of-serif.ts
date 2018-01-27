@@ -3,7 +3,7 @@ import { INovel } from '../inovel';
 import Token from '../token';
 import CharacterIdentity from '../../character-identity';
 import identity from '../../identity';
-import extractNamePart from '../../extract-name-part-in-serif';
+import extractNamePart, { fast as extractNamePartFast } from '../../extract-name-part-in-serif';
 
 export default {
 	name: 'name-part-of-serif',
@@ -201,7 +201,7 @@ function fastExec(novel: INovel, buffer: string): Token[] {
 		return null;
 	}
 
-	const part = extractNamePart(buffer);
+	const part = extractNamePartFast(buffer);
 
 	if (part === null) {
 		const ind = buffer.indexOf('\n');

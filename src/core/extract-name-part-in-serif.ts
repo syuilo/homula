@@ -54,8 +54,11 @@ export const fast = (serif: string): string => {
 	}
 
 	const i = serif.indexOf('「');
+	const n = serif.indexOf('\n');
 
-	if (i != -1) {
+	if (n < i) return null;
+
+	if (i > -1) {
 		return serif.substring(0, i);
 	} else {
 		return null;
