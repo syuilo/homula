@@ -71,9 +71,13 @@ describe('advance', () => {
 	let origin;
 
 	it('detect', () => {
-		origin = homula.utility.detectOrigin(world, null, testText);
+		origin = homula.utility.detectOrigin({
+			world,
+			title: null,
+			text: testText
+		});
 
-		should.equal(origin[0].id, 'a');
+		should.equal(origin[0], 'a');
 	});
 
 	it('analyze', () => {
@@ -114,4 +118,23 @@ it('fast', () => {
 
 	should.equal(html[0],
 		'＜向日葵の家＞<br><br><b style="color:#e2b03a">櫻子</b>「向日葵～……」<br><br><b style="color:#416798">向日葵</b>「何ですの？」<br><br>...');
+});
+
+it('intercepted serifs', () => {
+	const novel = new homula.Novel({
+		text: '櫻子「あか向日葵「り」',
+		characters: [{
+			name: ['向日葵', 'ひま'],
+			color: '#416798'
+		}, {
+			name: ['櫻子', 'さく'],
+			color: '#e2b03a'
+		}],
+		fast: true
+	});
+
+	const html = novel.toHtml();
+
+	should.equal(html,
+		'<b style="color:#e2b03a">櫻子</b>「あか<b style="color:#416798">向日葵</b>「り」');
 });

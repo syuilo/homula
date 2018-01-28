@@ -37,15 +37,15 @@ export default class {
 	}
 
 	/**
-	 * 与えられたオリジンに登場するキャラクターを取得します。
+	 * 与えられたIDのオリジンに登場するキャラクターを取得します。
 	 * @param origins オリジン
 	 */
-	public getAllOriginCharacters(origins: Origin[]): Character[] {
+	public getAllOriginCharacters(origins: string[]): Character[] {
 		return this.characters.filter(c => {
 			let found = false;
 
 			origins.forEach(origin => {
-				if (c.origin.indexOf(origin.id) !== -1) {
+				if (c.origin.indexOf(origin) !== -1) {
 					found = true;
 				}
 			});

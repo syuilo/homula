@@ -8,7 +8,7 @@ import extractNamePartInSerif from '../../core/extract-name-part-in-serif';
  * 本文と思われる投稿をマークします(強)
  * @param world World
  * @param posts 投稿の配列
- * @param origins SSのオリジン
+ * @param origins SSのオリジンのID
  * @return マーク情報が付加された投稿の配列
  */
 export default function
@@ -23,7 +23,7 @@ export default function
 	(
 		world: World,
 		posts: P[],
-		origins: Origin[]
+		origins: string[]
 	):
 	(P & {
 		isMaster: boolean;

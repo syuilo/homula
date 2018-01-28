@@ -32,9 +32,13 @@ describe('thread', () => {
 		posts = posts.map(p => homula.utility.modifyTrip(p));
 		posts = homula.utility.weakMarkMaster(posts);
 		const text = posts.filter(p => p.isMaster).map(p => p.text).join('\n\n');
-		origin = homula.utility.detectOrigin(world, testNovel.title, text);
+		origin = homula.utility.detectOrigin({
+			world,
+			title: testNovel.title,
+			text
+		});
 
-		should.equal(origin[0].id, 'a');
+		should.equal(origin[0], 'a');
 	});
 
 	let novel;

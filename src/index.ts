@@ -9,7 +9,7 @@ import Renderer, { SimpleRenderer, ExtractedStyleRenderer } from './renderer';
 
 import World from './utility/world';
 import Origin from './utility/origin';
-import detectOrigin from './utility/detect-origin';
+import detectOrigin, { detectOriginFromTitle } from './utility/detect-origin';
 
 import modifyTrip from './utility/thread/modify-trip';
 import weakMarkMaster from './utility/thread/weak-mark-master';
@@ -28,6 +28,7 @@ export = {
 		World,
 		Origin,
 		detectOrigin,
+		detectOriginFromTitle,
 		modifyTrip,
 		weakMarkMaster,
 		strongMarkMaster,
