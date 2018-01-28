@@ -43,4 +43,12 @@ export default class {
 	public match(q: string): boolean {
 		return identity(this, q) !== null;
 	}
+
+	/**
+	 * 名前のアイデンティティがこのキャラクターであるか確認します(高速)
+	 * @return bool
+	 */
+	public matchFast(q: string): boolean {
+		return this.name.indexOf(q) > -1;
+	}
 }

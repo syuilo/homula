@@ -36,13 +36,11 @@ function exec(novel: INovel, buffer: string): Token[] {
 		return null;
 	}
 
-	const matchChars = novel.characters
-		.filter(c => c.match(part));
+	const matchChar = novel.characters
+		.find(c => c.match(part));
 
 	// キャラが見つかったら
-	if (matchChars.length !== 0) {
-		const matchChar = matchChars[0];
-
+	if (matchChar) {
 		const token = createCharacterNameToken(part, matchChar);
 		return [token];
 	}
@@ -139,7 +137,6 @@ function exec(novel: INovel, buffer: string): Token[] {
 		 * 一番長い文字列の解を選択するのであるから、「あかね」解が選択され、残りは「あかり」となり、
 		 * 同様に「あかり」に対しても「あか」と「あかり」の候補が検出され、その中から「あかり」が採択されて、
 		 * 最終的に「あかね」「あかり」だということが判断でき、正しい解釈を行うことができる。
-		 * ─便宜上、このアルゴリズムを syuilo法 と名付けた。
 		 * どのような手法にしろ、繋がった名前の解析時には、予め登場するキャラクターが全て把握出来ている必要があり、
 		 * この集合から新たなアイデンティティを獲得するのは難しい。
 		 * つまり、キャラクター抽出段階では、この対象を解析することは出来ない。
@@ -212,13 +209,11 @@ function fastExec(novel: INovel, buffer: string): Token[] {
 		}
 	}
 
-	const matchChars = novel.characters
-		.filter(c => c.match(part));
+	const matchChar = novel.characters
+		.find(c => c.matchFast(part));
 
 	// キャラが見つかったら
-	if (matchChars.length !== 0) {
-		const matchChar = matchChars[0];
-
+	if (matchChar) {
 		const name = createCharacterNameToken(part, matchChar);
 
 		const ind = buffer.indexOf('\n');
