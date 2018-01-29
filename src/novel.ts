@@ -221,13 +221,20 @@ export class Thread extends NovelBase {
 			return new Character(c);
 		});
 
-		this.posts = posts.map(p => ({
-			text: p.text,
-			isMaster: p.isMaster,
-			tokens: tokenize({
-				characters: this.characters
-			}, p.text, [anchor].concat(p.isMaster ? fast ? fastName : name : []))
-		}));
+		this.posts = posts.map(p => {
+			const rules = [];
+
+			if (!fast) rules.push(anchor);
+			if (p.isMaster) rules.push(fast ? fastName : name);
+
+			return {
+				text: p.text,
+				isMaster: p.isMaster,
+				tokens: tokenize({
+					characters: this.characters
+				}, p.text, rules)
+			};
+		});
 	}
 
 	/**
